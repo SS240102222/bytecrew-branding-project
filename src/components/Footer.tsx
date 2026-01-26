@@ -27,11 +27,11 @@ const Footer = () => {
             transition={{ delay: 0.1, duration: 0.5 }}
           >
             <a
-              href="mailto:ahmed.aasim.mail@gmail.com"
+              href="mailto: bytecrew.team@gmail.com"
               className="flex items-center gap-2 hover:text-primary transition-colors"
             >
               <Mail className="w-4 h-4" />
-              ahmed.aasim.mail@gmail.com
+              bytecrew.team@gmail.com
             </a>
             <span className="flex items-center gap-2">
               <MapPin className="w-4 h-4" />
