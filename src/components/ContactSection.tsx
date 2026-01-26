@@ -58,8 +58,8 @@ const ContactSection = () => {
     {
       icon: Mail,
       label: "Email",
-      value: "ahmed.aasim.mail@gmail.com",
-      href: "mailto:ahmed.aasim.mail@gmail.com",
+      value: "bytecrew.team@gmail.com",
+      href: "mailto: bytecrew.team@gmail.com",
     },
     {
       icon: MapPin,
