@@ -56,7 +56,7 @@ const AboutSection = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.3, duration: 0.6 }}
           >
-            Byte Studio is a web development studio focused on building practical solutions for real businesses. 
+            ByteCrew is a web development studio focused on building practical solutions for real businesses. 
             We specialize in modern web technologies like React and Next.js, creating fast, accessible, and 
             conversion-optimized websites. Based in Lahore, working with clients globally.
           </motion.p>
