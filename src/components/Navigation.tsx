@@ -3,22 +3,21 @@ import { motion } from "framer-motion";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-
+  
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
+  
   const navLinks = [
     { href: "#about", label: "About" },
     { href: "#services", label: "Services" },
     { href: "#contact", label: "Contact" },
   ];
-
+  
   return (
     <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -29,13 +28,14 @@ const Navigation = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="section-container flex items-center justify-between">
-        <a href="#" className="text-xl font-bold text-foreground hover:text-primary transition-colors">
-          ByteCreww
+        <a href="#" className="flex items-center gap-2 text-xl font-bold text-foreground hover:text-primary transition-colors">
+          <img src="/logo.png" alt="ByteCrew Logo" className="h-8 w-8 object-contain" />
+          ByteCrew
         </a>
         
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            
               key={link.href}
               href={link.href}
               className="nav-link text-sm font-medium uppercase tracking-wider"
@@ -44,8 +44,8 @@ const Navigation = () => {
             </a>
           ))}
         </div>
-
-        <a
+        
+        
           href="#contact"
           className="hidden md:inline-flex px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-primary/25"
         >
