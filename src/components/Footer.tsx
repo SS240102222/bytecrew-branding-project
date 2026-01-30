@@ -29,7 +29,7 @@ const Footer = () => {
             transition={{ delay: 0.05, duration: 0.5 }}
           >
             <Image
-              src="/Logo-Main.png" // Replace with your logo path
+              src="/logo.png" // Replace with your logo path
               alt="ByteCrew Logo"
               width={80}
               height={80}
