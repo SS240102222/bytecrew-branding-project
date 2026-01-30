@@ -30,7 +30,7 @@ const Navigation = () => {
     >
       <div className="section-container flex items-center justify-between">
         <a href="#" className="text-xl font-bold text-foreground hover:text-primary transition-colors">
-          ByteCrew
+          ByteCreww
         </a>
         
         <div className="hidden md:flex items-center gap-8">
