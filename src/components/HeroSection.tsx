@@ -39,7 +39,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
           >
-            We build fast, beautiful websites that drive results.
+            Creative Vision. Technical Precision.
           </motion.p>
 
           {/* CTA Buttons */}
