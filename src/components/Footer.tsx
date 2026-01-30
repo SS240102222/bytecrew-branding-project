@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Mail, MapPin } from "lucide-react";
+import Image from "next/image";
 
 const Footer = () => {
   return (
@@ -19,6 +20,23 @@ const Footer = () => {
             </p>
           </motion.div>
 
+          {/* Logo Section */}
+          <motion.div
+            className="flex items-center justify-center"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.05, duration: 0.5 }}
+          >
+            <Image
+              src="/Logo-Main.png" // Replace with your logo path
+              alt="ByteCrew Logo"
+              width={80}
+              height={80}
+              className="object-contain"
+            />
+          </motion.div>
+
           <motion.div
             className="flex flex-col sm:flex-row items-center gap-6 text-sm text-muted-foreground"
             initial={{ opacity: 0, y: 20 }}
@@ -26,8 +44,8 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.1, duration: 0.5 }}
           >
-            <a
-              href="mailto: bytecrew.team@gmail.com"
+            
+              href="mailto:bytecrew.team@gmail.com"
               className="flex items-center gap-2 hover:text-primary transition-colors"
             >
               <Mail className="w-4 h-4" />
