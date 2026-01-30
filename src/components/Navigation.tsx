@@ -29,26 +29,19 @@ const Navigation = () => {
     >
       <div className="section-container flex items-center justify-between">
         <a href="#" className="flex items-center gap-2 text-xl font-bold text-foreground hover:text-primary transition-colors">
-          <img src="/favicon.ico" alt="ByteCrew Logo" className="h-8 w-8 object-contain" />
+          <img src="/logo.png" alt="ByteCrew Logo" className="h-8 w-8 object-contain" />
           ByteCrew
         </a>
         
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            
-              key={link.href}
-              href={link.href}
-              className="nav-link text-sm font-medium uppercase tracking-wider"
-            >
+            <a key={link.href} href={link.href} className="nav-link text-sm font-medium uppercase tracking-wider">
               {link.label}
             </a>
           ))}
         </div>
         
-        
-          href="#contact"
-          className="hidden md:inline-flex px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-primary/25"
-        >
+        <a href="#contact" className="hidden md:inline-flex px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-primary/25">
           Let's Talk
         </a>
       </div>
