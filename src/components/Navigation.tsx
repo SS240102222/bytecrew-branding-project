@@ -29,7 +29,7 @@ const Navigation = () => {
     >
       <div className="section-container flex items-center justify-between">
         <a href="#" className="flex items-center gap-2 text-xl font-bold text-foreground hover:text-primary transition-colors">
-          <img src="/logo.png" alt="ByteCrew Logo" className="h-8 w-8 object-contain" />
+          <img src="/IMG_4189.JPG_32px.ico" alt="ByteCrew Logo" className="h-8 w-8 object-contain" />
           ByteCrew
         </a>
         
