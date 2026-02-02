@@ -63,15 +63,14 @@ const ServicesSection = () => {
 
         {/* Services Grid */}
         <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          {services.map((service, index) => (
-            <motion.div
-              key={service.title}
-              className="glass-card rounded-2xl p-8 hover-lift group cursor-pointer"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
-              whileHover={{ borderColor: "hsl(var(--primary) / 0.5)" }}
-            >
+            {services.map((service, index) => (
+              <motion.div
+                key={service.title}
+                className="glass-card rounded-2xl p-8 hover-lift group cursor-pointer hover:border-primary/50 transition-colors duration-200"
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.2 + index * 0.05, duration: 0.4 }}
+              >
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
                 <service.icon className="w-7 h-7 text-primary" />
               </div>

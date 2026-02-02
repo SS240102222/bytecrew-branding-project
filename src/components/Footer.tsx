@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Mail, MapPin } from "lucide-react";
-import Image from "next/image";
 
 const Footer = () => {
   return (
@@ -28,8 +27,8 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.05, duration: 0.5 }}
           >
-            <Image
-              src="/logo.png" // Replace with your logo path
+            <img
+              src="/logo.png"
               alt="ByteCrew Logo"
               width={80}
               height={80}
@@ -44,7 +43,7 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.1, duration: 0.5 }}
           >
-            
+            <a
               href="mailto:bytecrew.team@gmail.com"
               className="flex items-center gap-2 hover:text-primary transition-colors"
             >

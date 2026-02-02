@@ -112,7 +112,7 @@ const ContactSection = () => {
                   className="flex items-center gap-4"
                   initial={{ opacity: 0, x: -20 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
+                  transition={{ delay: 0.3 + index * 0.05, duration: 0.4 }}
                 >
                   <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
                     <info.icon className="w-5 h-5 text-primary" />

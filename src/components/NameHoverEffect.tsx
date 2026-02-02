@@ -41,8 +41,8 @@ const NameHoverEffect = ({ name, className = "" }: NameHoverEffectProps) => {
           }}
           transition={{
             type: "spring",
-            stiffness: 400,
-            damping: 15,
+            stiffness: 300,
+            damping: 20,
           }}
           style={{
             textShadow: hoveredIndex === index 

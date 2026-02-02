@@ -78,7 +78,7 @@ const AboutSection = () => {
                   className="glass-card rounded-xl p-6 text-center hover-lift"
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
+                  transition={{ delay: 0.4 + index * 0.05, duration: 0.4 }}
                 >
                   <value.icon className="w-8 h-8 text-primary mx-auto mb-3" />
                   <span className="text-sm font-medium">{value.label}</span>
@@ -100,11 +100,10 @@ const AboutSection = () => {
               {skills.map((skill, index) => (
                 <motion.div
                   key={skill.label}
-                  className="glass-card rounded-xl p-4 text-center hover:border-primary/50 transition-colors"
+                  className="glass-card rounded-xl p-4 text-center hover:border-primary/50 hover:scale-105 transition-all duration-200"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ delay: 0.8 + index * 0.05, duration: 0.4 }}
-                  whileHover={{ scale: 1.05 }}
+                  transition={{ delay: 0.6 + index * 0.03, duration: 0.3 }}
                 >
                   <skill.icon className="w-6 h-6 text-primary mx-auto mb-2" />
                   <span className="text-xs font-medium text-muted-foreground">{skill.label}</span>
