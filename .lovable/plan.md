@@ -1,111 +1,129 @@
 
-# Performance Optimization Plan for About Section
+
+# Performance Optimization Plan for Services & Contact Sections
 
 ## Problem Analysis
 
-The About section has significant performance issues due to:
+Both sections have performance issues similar to what was fixed in the About section:
 
-1. **10 individually animated cards** - Each with its own Framer Motion animation causing layout recalculations
-2. **backdrop-blur-lg on glass-card** - Applied to ALL 10 cards, extremely GPU-intensive
-3. **Nested animations** - Parent wrapper animates while each child card also animates separately
-4. **hover:scale-105 with blur** - Scaling blurred elements causes expensive repaints
-5. **Multiple `useInView` triggers** - Each card recalculates visibility
+### Services Section Issues
+1. **4 individually animated `motion.div` cards** - Each with its own Framer Motion animation
+2. **`glass-card` with `backdrop-blur-lg`** - Applied to all 4 service cards (GPU-intensive)
+3. **`hover-lift` class** - Causes translate transforms on hover
+4. **Nested `motion.span` in header** - Unnecessary separate animation for the badge
+5. **Multiple animation triggers** - Header has nested `motion.div` and `motion.span`
+
+### Contact Section Issues
+1. **6+ `motion.div` wrappers** - Header, contact info wrapper, 3 contact items, response text, and form
+2. **`glass-card` with `backdrop-blur-lg`** - Applied to the contact form
+3. **Horizontal animations (`x: -30`, `x: 30`)** - Layout-triggering transforms
+4. **Nested `motion.div` for each contact info item** - 3 separate animations inside a parent animation
 
 ---
 
 ## Implementation Plan
 
-### Step 1: Remove backdrop-blur from Individual Cards
+### Step 1: Optimize ServicesSection.tsx
 
-Replace the expensive `backdrop-blur-lg` with a simple solid background on the value and skill cards.
-
+**Remove `glass-card` from service cards:**
 ```text
-// Before (glass-card with blur):
-className="glass-card rounded-xl p-6..."
+// Before:
+className="glass-card rounded-2xl p-8 hover-lift..."
 
-// After (optimized solid card):
-className="bg-card/80 border border-border/50 rounded-xl p-6..."
+// After:
+className="bg-card/80 border border-border/50 rounded-2xl p-8..."
 ```
 
-This eliminates the most expensive GPU operation.
-
----
-
-### Step 2: Replace Individual Card Animations with CSS
-
-Instead of 10 separate Framer Motion animations, use a single parent animation with CSS transitions for children.
-
+**Replace 4 `motion.div` cards with CSS animations:**
 ```text
-// Before: Each card has its own motion.div with staggered delay
-{values.map((value, index) => (
+// Before: Each card is a motion.div with staggered delay
+{services.map((service, index) => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
+    initial={{ opacity: 0, y: 30 }}
     animate={isInView ? { opacity: 1, y: 0 } : {}}
-    transition={{ delay: 0.4 + index * 0.05 }}
+    transition={{ delay: 0.2 + index * 0.05 }}
   >
 
-// After: Single container animation, children use CSS animation-delay
-<motion.div animate={isInView ? { opacity: 1 } : { opacity: 0 }}>
-  <div className="grid...">
-    {values.map((value, index) => (
-      <div 
-        className="...animate-fade-in" 
-        style={{ animationDelay: `${index * 50}ms` }}
-      >
+// After: Regular div with CSS animation-delay
+{services.map((service, index) => (
+  <div
+    className={`...${isInView ? 'animate-fade-in-up' : 'opacity-0'}`}
+    style={{ animationDelay: `${index * 80}ms` }}
+  >
 ```
+
+**Simplify header to single `motion.div`:**
+- Remove nested `motion.span` for the badge
+- Keep only one `motion.div` for the entire header block
+
+**Remove `hover-lift` class:**
+- Replace with simpler `hover:border-primary/50 transition-colors`
 
 ---
 
-### Step 3: Remove hover:scale-105 from Skill Cards
+### Step 2: Optimize ContactSection.tsx
 
-Replace JavaScript-based scale transforms with a lighter CSS hover effect.
-
+**Remove `glass-card` from contact form:**
 ```text
-// Before (expensive):
-hover:scale-105 transition-all
+// Before:
+className="glass-card rounded-2xl p-8..."
 
-// After (lighter):
-hover:border-primary/50 transition-colors
+// After:
+className="bg-card/80 border border-border/50 rounded-2xl p-8..."
 ```
 
+**Replace 3 contact info `motion.div` items with CSS animations:**
+```text
+// Before: Each contact item is a motion.div
+{contactInfo.map((info, index) => (
+  <motion.div
+    initial={{ opacity: 0, x: -20 }}
+    animate={isInView ? { opacity: 1, x: 0 } : {}}
+  >
+
+// After: Regular div with CSS animation
+{contactInfo.map((info, index) => (
+  <div
+    className={`...${isInView ? 'animate-fade-in-up' : 'opacity-0'}`}
+    style={{ animationDelay: `${index * 80}ms` }}
+  >
+```
+
+**Remove horizontal animations:**
+- Replace `x: -30` and `x: 30` with vertical `y` animations or CSS only
+- Horizontal layout animations are more expensive than vertical
+
+**Consolidate to 2 `motion.div` wrappers:**
+- One for the section header
+- One for the main content grid (contact info + form)
+- Remove individual animations from contact items and form
+
+**Remove response text animation:**
+- The "We typically respond within 24 hours" text has its own `motion.p` which is unnecessary
+
 ---
 
-### Step 4: Consolidate to Single useInView
+### Step 3: Add CSS Animation Variant for Horizontal Entry
 
-Use one `useInView` check for the entire section instead of implicit checks on nested components.
-
----
-
-### Step 5: Add CSS-based Staggered Animation
-
-Add a simple CSS keyframe animation for fade-in that children can use with `animation-delay`.
-
+Add a new CSS animation for elements that need slide-in effect without Framer Motion:
 ```text
 // Add to index.css
-@keyframes fade-in-up {
-  from { 
-    opacity: 0; 
-    transform: translateY(12px); 
+@keyframes fade-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
   }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
-.animate-fade-in-up {
-  animation: fade-in-up 0.4s ease-out forwards;
+.animate-fade-in-left {
+  animation: fade-in-left 0.4s ease-out forwards;
   opacity: 0;
 }
 ```
-
----
-
-### Step 6: Simplify Section Structure
-
-Reduce the number of `motion.div` wrappers from 6+ to just 2:
-- One for the section header
-- One for the main content area
 
 ---
 
@@ -115,42 +133,52 @@ Reduce the number of `motion.div` wrappers from 6+ to just 2:
 
 | File | Changes |
 |------|---------|
-| `src/components/AboutSection.tsx` | Replace 10 `motion.div` cards with regular `div` elements using CSS animations; remove glass-card from individual cards |
-| `src/index.css` | Add `fade-in-up` keyframe animation; create optimized card class without blur |
+| `src/components/ServicesSection.tsx` | Replace 4 `motion.div` cards with CSS animations; remove `glass-card`; simplify header; remove `hover-lift` |
+| `src/components/ContactSection.tsx` | Replace 3 contact info animations with CSS; remove `glass-card` from form; consolidate to 2 `motion.div` wrappers |
+| `src/index.css` | Add `fade-in-left` keyframe and utility class |
 
 ### Changes Summary
 
-**AboutSection.tsx:**
-- Remove individual `motion.div` for each value/skill card
-- Replace with `div` elements using CSS `animate-fade-in-up` class
-- Add inline `animationDelay` style for stagger effect
-- Keep only 2 `motion.div` wrappers (header + content)
+**ServicesSection.tsx:**
+- Remove `motion.span` in header (keep single `motion.div`)
+- Replace 4 `motion.div` service cards with `div` using `animate-fade-in-up`
 - Replace `glass-card` with `bg-card/80 border border-border/50`
-- Remove `hover:scale-105` from skill cards
+- Remove `hover-lift`, use `hover:border-primary/50 transition-colors`
+
+**ContactSection.tsx:**
+- Remove `motion.span` in header
+- Remove `motion.div` from each contact info item
+- Remove `motion.p` from response text
+- Replace horizontal animations with CSS
+- Replace `glass-card` on form with `bg-card/80 border border-border/50`
+- Keep only 2 main `motion.div` wrappers
 
 **index.css:**
-- Add `fade-in-up` keyframe animation
-- Add `.animate-fade-in-up` utility class
-- Add `.card-optimized` class as blur-free alternative
+- Add `@keyframes fade-in-left` animation
+- Add `.animate-fade-in-left` utility class
+- Add reduced-motion support for new animation
 
 ### Expected Performance Improvements
 
-| Metric | Before | After |
-|--------|--------|-------|
-| Animated Elements | 10+ motion.div | 2 motion.div |
-| Blur Operations | 10 cards | 0 cards |
-| Scroll Performance | ~30fps | ~60fps |
-| GPU Memory | High | Low |
+| Section | Before | After |
+|---------|--------|-------|
+| Services - motion.div count | 6 | 2 |
+| Services - blur operations | 4 cards | 0 cards |
+| Contact - motion.div count | 7+ | 2 |
+| Contact - blur operations | 1 form | 0 |
+| Combined scroll FPS | ~30-40fps | ~60fps |
 
 ---
 
 ## Summary
 
-This optimization focuses specifically on the About section's "What We Value" and "Our Stack" grids by:
+This optimization applies the same proven pattern from the About section to Services and Contact:
 
-1. Removing expensive `backdrop-blur` from individual cards
-2. Replacing 10 Framer Motion animations with lightweight CSS animations
-3. Removing `hover:scale` transforms
-4. Using CSS `animation-delay` for stagger effects instead of JavaScript
+1. Remove `backdrop-blur-lg` (most expensive GPU operation)
+2. Replace multiple `motion.div` elements with CSS animations using `animation-delay`
+3. Remove `hover-lift` transforms
+4. Consolidate to minimal Framer Motion usage (2 wrappers per section max)
+5. Use CSS for staggered entry animations instead of JavaScript
 
-The visual appearance remains virtually identical, but scrolling will be significantly smoother.
+Visual appearance remains identical while significantly improving scroll performance across the entire page.
+
