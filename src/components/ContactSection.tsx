@@ -52,8 +52,8 @@ const ContactSection = () => {
     {
       icon: MessageCircle,
       label: "WhatsApp",
-      value: "+92 328-9785903",
-      href: "https://wa.me/923289785903",
+      value: "+92 339-0053646",
+      href: "https://wa.me/923390053646",
     },
     {
       icon: Mail,
