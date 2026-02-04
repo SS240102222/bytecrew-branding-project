@@ -28,7 +28,7 @@ const Footer = () => {
             transition={{ delay: 0.05, duration: 0.5 }}
           >
             <img
-              src="/logo.png"
+              src="/logo-removebg-preview.png"
               alt="ByteCrew Logo"
               width={80}
               height={80}
