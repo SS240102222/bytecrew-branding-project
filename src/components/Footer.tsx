@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Mail, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -56,6 +57,22 @@ const Footer = () => {
             </span>
           </motion.div>
         </div>
+
+        <motion.div
+          className="flex flex-wrap items-center justify-center gap-4 mt-8 pt-6 border-t border-border text-sm text-muted-foreground"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          <Link to="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</Link>
+          <span className="text-border">|</span>
+          <Link to="/return-refund-policy" className="hover:text-primary transition-colors">Return/Refund Policy</Link>
+          <span className="text-border">|</span>
+          <Link to="/shipping-service-policy" className="hover:text-primary transition-colors">Shipping & Service Policy</Link>
+          <span className="text-border">|</span>
+          <Link to="/terms-conditions" className="hover:text-primary transition-colors">Terms & Conditions</Link>
+        </motion.div>
       </div>
     </footer>
   );
