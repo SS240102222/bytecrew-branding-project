@@ -35,7 +35,7 @@ const Navigation = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="section-container flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2 text-xl font-bold text-foreground hover:text-primary transition-colors">
+        <a href="https://bytecrew.vercel.app" className="flex items-center gap-2 text-xl font-bold text-foreground hover:text-primary transition-colors">
           <img src="/logo-removebg-preview.png" alt="ByteCrew Logo" className="h-8 w-8 object-contain" />
           ByteCrew
         </a>

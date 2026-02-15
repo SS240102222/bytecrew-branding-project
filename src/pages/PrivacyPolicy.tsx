@@ -164,9 +164,9 @@ const PrivacyPolicy = () => (
     <p>Questions or concerns about your privacy? We're here to help.</p>
     <p>
       <strong className="text-foreground">ByteCrew</strong><br />
-      Email: privacy@bytecrew.com<br />
-      Phone: [Your Phone Number]<br />
-      Address: [Your Business Address]
+      Email: bytecrew.team@gmail.com<br />
+      Phone: +92 339-0053646<br />
+      Address: Lahore, Pakistan
     </p>
     <p>For data access, correction, or deletion requests, please contact us using the information above. We'll respond within 30 days.</p>
 

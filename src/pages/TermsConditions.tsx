@@ -397,8 +397,8 @@ const TermsConditions = () => (
 
     <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">Contact Us First</h3>
     <ul className="list-disc pl-6 space-y-2">
-      <li>Email: support@bytecrew.com</li>
-      <li>Phone: [Your Phone Number]</li>
+      <li>Email: bytecrew.team@gmail.com</li>
+      <li>Phone: +92 339-0053646</li>
       <li>We'll respond within <strong className="text-foreground">1-2 business days</strong></li>
       <li>Most disputes resolved through good-faith discussion</li>
     </ul>
@@ -414,14 +414,14 @@ const TermsConditions = () => (
     <ul className="list-disc pl-6 space-y-2">
       <li>If direct resolution fails, we agree to mediation before litigation</li>
       <li>Mediation costs split equally</li>
-      <li>Conducted in [Your City, State]</li>
+      <li>Conducted in Lahore, Pakistan</li>
     </ul>
 
     <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">Arbitration and Legal</h3>
     <ul className="list-disc pl-6 space-y-2">
       <li>Disputes not resolved through mediation subject to binding arbitration</li>
-      <li>Governed by laws of [Your State]</li>
-      <li>Venue: [Your County, State]</li>
+      <li>Governed by laws of Pakistan</li>
+      <li>Venue: Lahore, Pakistan</li>
       <li>Each party responsible for own legal fees unless otherwise awarded</li>
     </ul>
 
@@ -499,15 +499,13 @@ const TermsConditions = () => (
     <p>Questions about these Terms & Conditions?</p>
     <p>
       <strong className="text-foreground">ByteCrew</strong><br />
-      [Your Street Address]<br />
-      [City, State, ZIP]<br />
-      Email: legal@bytecrew.com<br />
-      Phone: [Your Phone Number]<br />
-      Website: [Your Website URL]
+      Lahore, Pakistan<br />
+      Email: bytecrew.team@gmail.com<br />
+      Phone: +92 339-0053646
     </p>
     <p><strong className="text-foreground">Business Hours:</strong><br />
-      Monday - Friday: [Hours]<br />
-      Saturday: [Hours]<br />
+      Monday - Friday: 10:00 AM - 8:00 PM<br />
+      Saturday: 11:00 AM - 6:00 PM<br />
       Sunday: Closed
     </p>
 

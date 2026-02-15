@@ -41,7 +41,7 @@ const ReturnRefundPolicy = () => (
 
     <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">How to Request a Refund</h3>
     <ol className="list-decimal pl-6 space-y-2">
-      <li>Contact us at support@bytecrew.com or call us within the refund window</li>
+      <li>Contact us at bytecrew.team@gmail.com or call us within the refund window</li>
       <li>Provide your service order number and explain the issue</li>
       <li>We'll arrange to inspect the device if needed (remote or in-person)</li>
       <li>Approved refunds are processed within <strong className="text-foreground">7-10 business days</strong> to your original payment method</li>
@@ -266,9 +266,9 @@ const ReturnRefundPolicy = () => (
     <p>Questions about refunds or returns?</p>
     <p>
       <strong className="text-foreground">ByteCrew</strong><br />
-      Email: support@bytecrew.com<br />
-      Phone: [Your Phone Number]<br />
-      Hours: [Your Business Hours]
+      Email: bytecrew.team@gmail.com<br />
+      Phone: +92 339-0053646<br />
+      Hours: Monday - Friday: 10:00 AM - 8:00 PM | Saturday: 11:00 AM - 6:00 PM
     </p>
     <p>We typically respond to refund requests within one business day.</p>
 
