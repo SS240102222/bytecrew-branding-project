@@ -39,14 +39,14 @@ const ShippingServicePolicy = () => (
 
     <p><strong className="text-foreground">Service Area:</strong></p>
     <ul className="list-disc pl-6 space-y-2">
-      <li>[Define your geographic coverage area]</li>
+      <li>Within Lahore and surrounding areas</li>
       <li>Remote areas may incur travel fees (quoted upfront)</li>
     </ul>
 
     <p><strong className="text-foreground">Fees:</strong></p>
     <ul className="list-disc pl-6 space-y-2">
-      <li>Standard service call: <strong className="text-foreground">$[XX]</strong> (may be waived if repair is completed)</li>
-      <li>Travel outside standard area: <strong className="text-foreground">$[XX] per additional mile</strong></li>
+      <li>Standard service call: <strong className="text-foreground">PKR 2,000</strong> (may be waived if repair is completed)</li>
+      <li>Travel outside standard area: <strong className="text-foreground">PKR 100 per additional kilometer</strong></li>
       <li>After-hours/weekend service: <strong className="text-foreground">1.5x standard rate</strong></li>
     </ul>
 
@@ -57,9 +57,9 @@ const ShippingServicePolicy = () => (
 
     <p><strong className="text-foreground">Drop-Off Hours:</strong></p>
     <ul className="list-disc pl-6 space-y-2">
-      <li>Monday - Friday: [Business Hours]</li>
-      <li>Saturday: [Business Hours]</li>
-      <li>Sunday: Closed (or limited hours)</li>
+      <li>Monday - Friday: 10:00 AM - 8:00 PM</li>
+      <li>Saturday: 11:00 AM - 6:00 PM</li>
+      <li>Sunday: Closed</li>
     </ul>
 
     <p><strong className="text-foreground">Process:</strong></p>
@@ -106,7 +106,7 @@ const ShippingServicePolicy = () => (
     <p><strong className="text-foreground">How Remote Sessions Work:</strong></p>
     <ol className="list-decimal pl-6 space-y-2">
       <li><strong className="text-foreground">Schedule</strong> a remote session or request immediate support</li>
-      <li><strong className="text-foreground">Connect:</strong> We'll send you a secure link to grant access</li>
+      <li><strong className="text-foreground">Connect:</strong> We'll send you a secure link to grant access (we use TeamViewer, AnyDesk, or similar secure remote desktop software)</li>
       <li><strong className="text-foreground">Service:</strong> You can watch everything we do on your screen</li>
       <li><strong className="text-foreground">Complete:</strong> Session ends when issue is resolved; you maintain full control</li>
       <li><strong className="text-foreground">Follow-up:</strong> We send a summary of work performed</li>
@@ -165,20 +165,20 @@ const ShippingServicePolicy = () => (
       <li>You're responsible for shipping costs to ByteCrew</li>
       <li>Use a trackable shipping method (UPS, FedEx, USPS with tracking)</li>
       <li>Insure valuable items—we're not liable for carrier damage</li>
-      <li>Ship to: [Your Business Address with ATTN: Repairs]</li>
+      <li>Ship to: ByteCrew, Lahore, Pakistan (Contact us for specific address before shipping)</li>
     </ul>
     <p><strong className="text-foreground">Step 4: Service & Return</strong></p>
     <ul className="list-disc pl-6 space-y-2">
       <li>We'll email you when device arrives</li>
       <li>Diagnosis completed within <strong className="text-foreground">2-3 business days</strong> of receipt</li>
       <li>You approve the quote; we complete the repair</li>
-      <li>Standard return shipping included for warranty repairs</li>
+      <li>Standard return shipping included for warranty repairs (you pay shipping for paid repairs or if declining service)</li>
     </ul>
 
     <p><strong className="text-foreground">Return Shipping:</strong></p>
     <ul className="list-disc pl-6 space-y-2">
       <li><strong className="text-foreground">Free</strong> return shipping on warranty repairs</li>
-      <li><strong className="text-foreground">$[XX]</strong> standard shipping on paid repairs (added to invoice)</li>
+      <li><strong className="text-foreground">PKR 1,500</strong> standard shipping on paid repairs (added to invoice)</li>
       <li>Expedited shipping available at your expense</li>
       <li>We pack items securely and insure shipments over $500</li>
     </ul>
@@ -203,7 +203,7 @@ const ShippingServicePolicy = () => (
     <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">Shipping Costs</h3>
     <ul className="list-disc pl-6 space-y-2">
       <li>Calculated based on weight, size, and destination</li>
-      <li>Free standard shipping on orders over <strong className="text-foreground">$[XXX]</strong></li>
+      <li>Free standard shipping on orders over <strong className="text-foreground">PKR 50,000</strong></li>
       <li>Shipping costs displayed at checkout before you confirm</li>
     </ul>
 
@@ -217,13 +217,13 @@ const ShippingServicePolicy = () => (
     <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">Tracking and Delivery</h3>
     <ul className="list-disc pl-6 space-y-2">
       <li>Tracking number provided via email once shipped</li>
-      <li>Signature required for orders over <strong className="text-foreground">$500</strong></li>
+      <li>Signature required for orders over <strong className="text-foreground">PKR 100,000</strong></li>
       <li>Packages typically delivered Monday-Saturday (carrier dependent)</li>
     </ul>
 
     <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">Shipping Regions</h3>
     <ul className="list-disc pl-6 space-y-2">
-      <li>We ship to all 50 US states</li>
+      <li>We ship throughout Pakistan</li>
       <li>International shipping available (contact us for quote)</li>
       <li>PO Boxes accepted for small items only</li>
     </ul>
@@ -342,8 +342,8 @@ const ShippingServicePolicy = () => (
 
     <p><strong className="text-foreground">Business Hours:</strong></p>
     <ul className="list-disc pl-6 space-y-2">
-      <li>Monday - Friday: [Hours]</li>
-      <li>Saturday: [Hours]</li>
+      <li>Monday - Friday: 10:00 AM - 8:00 PM</li>
+      <li>Saturday: 11:00 AM - 6:00 PM</li>
       <li>Sunday: Closed</li>
       <li>Emergency support available by appointment</li>
     </ul>
@@ -370,9 +370,8 @@ const ShippingServicePolicy = () => (
     <h3 className="text-xl font-semibold text-foreground mt-6 mb-3">Address and Location</h3>
     <p>
       <strong className="text-foreground">ByteCrew</strong><br />
-      [Your Street Address]<br />
-      [City, State, ZIP]<br />
-      [Parking/Access Instructions if relevant]
+      Lahore, Pakistan<br />
+      (Contact us for specific address and directions)
     </p>
 
     <hr className="border-border" />
@@ -408,13 +407,13 @@ const ShippingServicePolicy = () => (
 
     <p><strong className="text-foreground">On-Site Service Area:</strong></p>
     <ul className="list-disc pl-6 space-y-2">
-      <li>[Define coverage area]</li>
+      <li>Within Lahore and surrounding areas</li>
       <li>Travel fees apply outside this range</li>
     </ul>
 
     <p><strong className="text-foreground">Drop-Off Service:</strong></p>
     <ul className="list-disc pl-6 space-y-2">
-      <li>Available to anyone who can visit our physical location</li>
+      <li>Available to anyone who can visit our physical location in Lahore</li>
     </ul>
 
     <p><strong className="text-foreground">Remote Service:</strong></p>
@@ -425,7 +424,7 @@ const ShippingServicePolicy = () => (
 
     <p><strong className="text-foreground">Shipping:</strong></p>
     <ul className="list-disc pl-6 space-y-2">
-      <li>US: All 50 states</li>
+      <li>Pakistan: All major cities</li>
       <li>International: Contact for availability and rates</li>
     </ul>
 
@@ -443,9 +442,8 @@ const ShippingServicePolicy = () => (
     <h2 className="text-2xl font-semibold text-foreground mt-8 mb-4">Questions?</h2>
     <p>
       <strong className="text-foreground">ByteCrew</strong><br />
-      Email: support@bytecrew.com<br />
-      Phone: [Your Phone Number]<br />
-      Website: [Your Website URL]
+      Email: bytecrew.team@gmail.com<br />
+      Phone: +92 339-0053646
     </p>
     <p>We're happy to discuss service options, timelines, or shipping methods before you commit. Reach out anytime!</p>
 
