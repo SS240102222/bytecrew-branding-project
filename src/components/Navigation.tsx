@@ -20,8 +20,9 @@ const Navigation = () => {
   }, []);
   
   const navLinks = [
-    { href: "#about", label: "About" },
+    { href: "#projects", label: "Projects" },
     { href: "#services", label: "Services" },
+    { href: "#about", label: "About Us" },
     { href: "#contact", label: "Contact" },
   ];
   
