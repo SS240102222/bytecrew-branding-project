@@ -23,7 +23,7 @@ const projects = [
   },
   {
     title: "RayTechPK Online Store",
-    description: "~IN PROGRESS~<br>RayTechPK is a modern e-commerce site for high-performance gaming hardware and PC components, featuring product categories, featured deals, and testimonials to provide a premium tech shopping experience.",
+    description: "~IN PROGRESS~<br />RayTechPK is a modern e-commerce site for high-performance gaming hardware and PC components, featuring product categories, featured deals, and testimonials to provide a premium tech shopping experience.",
     image: "/projects/RayTechPK.png",
     url: "https://raytech-pk.vercel.app",
   },
