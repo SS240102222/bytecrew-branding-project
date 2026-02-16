@@ -4,28 +4,28 @@ import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 
 const projects = [
   {
-    title: "Monal",
+    title: "Monal Restaurant",
     description: "A high-end rooftop dining destination showcasing panoramic city views alongside a diverse buffet and à la carte menu.",
     image: "/projects/Monal-Lahore.png",
     url: "https://monallahore.vercel.app",
   },
   {
-    title: "Edge Grooming",
+    title: "Edge Grooming Barbershop",
     description: "A premium men’s barbershop website offering professional grooming services and an upscale, traditional salon experience.",
     image: "/projects/The-Edge.png",
     url: "https://edge-grooming.vercel.app",
   },
   {
-    title: "Andaaz",
+    title: "Andaaz Restaurant",
     description: "A luxury restaurant in Lahore that blends traditional heritage cuisine with iconic views of the Badshahi Mosque.",
     image: "/projects/Andaaz-Restaurant.png",
     url: "https://andaazrestaurant.vercel.app",
   },
   {
-    title: "RayTechPK",
-    description: "IN PROGRESS",
+    title: "RayTechPK Online Store",
+    description: "~IN PROGRESS~<br>RayTechPK is a modern e-commerce site for high-performance gaming hardware and PC components, featuring product categories, featured deals, and testimonials to provide a premium tech shopping experience.",
     image: "/projects/RayTechPK.png",
-    url: "NULL",
+    url: "https://raytech-pk.vercel.app",
   },
 ];
 
