@@ -4,40 +4,28 @@ import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 
 const projects = [
   {
-    title: "YouTube",
-    description: "The world's largest video sharing platform for streaming and uploading content.",
-    image: "/projects/youtube.png",
-    url: "https://youtube.com",
+    title: "Monal",
+    description: "A high-end rooftop dining destination showcasing panoramic city views alongside a diverse buffet and à la carte menu.",
+    image: "/projects/Monal-Lahore.png",
+    url: "https://monallahore.vercel.app",
   },
   {
-    title: "Google",
-    description: "The most widely used search engine, powering billions of queries daily.",
-    image: "/projects/google.png",
-    url: "https://google.com",
+    title: "Edge Grooming",
+    description: "A premium men’s barbershop website offering professional grooming services and an upscale, traditional salon experience.",
+    image: "/projects/The-Edge.png",
+    url: "https://edge-grooming.vercel.app",
   },
   {
-    title: "Spotify",
-    description: "A leading music and podcast streaming service with millions of tracks.",
-    image: "/projects/spotify.png",
-    url: "https://spotify.com",
+    title: "Andaaz",
+    description: "A luxury restaurant in Lahore that blends traditional heritage cuisine with iconic views of the Badshahi Mosque.",
+    image: "/projects/Andaaz-Restaurant.png",
+    url: "https://andaazrestaurant.vercel.app",
   },
   {
-    title: "ChatGPT",
-    description: "An AI-powered conversational assistant built by OpenAI.",
-    image: "/projects/chatgpt.png",
-    url: "https://chatgpt.com",
-  },
-  {
-    title: "Amazon",
-    description: "The world's largest online marketplace for shopping and e-commerce.",
-    image: "/projects/amazon.png",
-    url: "https://amazon.com",
-  },
-  {
-    title: "Instagram",
-    description: "A social media platform for sharing photos, videos, and stories.",
-    image: "/projects/instagram.png",
-    url: "https://instagram.com",
+    title: "RayTechPK",
+    description: "IN PROGRESS",
+    image: "/projects/RayTechPK.png",
+    url: "NULL",
   },
 ];
 
