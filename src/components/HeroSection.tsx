@@ -75,7 +75,7 @@ const HeroSection = () => {
     y: { delay: 1.5, duration: 1.5, repeat: Infinity, ease: "easeInOut" },
   }}
 >
-  <a href="#about" className="flex flex-col items-center text-muted-foreground hover:text-primary transition-colors">
+  <a href="#projects" className="flex flex-col items-center text-muted-foreground hover:text-primary transition-colors">
     <span className="text-sm font-medium mb-2">Scroll</span>
     <ArrowDown className="w-5 h-5" />
           </a>

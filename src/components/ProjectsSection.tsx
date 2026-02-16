@@ -80,11 +80,8 @@ const ProjectsSection = () => {
             Our Projects
           </span>
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Work We&apos;ve <span className="text-primary">Delivered</span>
+            Our Projects <span className="text-primary">Gallery</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A selection of projects we&apos;ve built for our clients.
-          </p>
         </motion.div>
 
         {/* Carousel wrapper */}
