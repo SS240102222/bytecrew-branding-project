@@ -20,8 +20,7 @@ const AboutSection = () => {
     { icon: Palette, label: "UI/UX Design" },
     { icon: Server, label: "Node.js" },
     { icon: Database, label: "PostgreSQL" },
-    { icon: Zap, label: "Performance" },
-    { icon: BunIcon, label: "Bun" },
+    { icon: BunIcon, label: "Bun Framework" },
   ];
 
   return (
