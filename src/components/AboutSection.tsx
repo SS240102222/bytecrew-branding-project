@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Code, Palette, Zap, Sparkles, Globe, Server, Database, Layout } from "lucide-react";
+import { Code, Palette, Zap, Sparkles, Globe, Server, Database, Layout, Zap as BunIcon } from "lucide-react";
 
 const AboutSection = () => {
   const ref = useRef(null);
@@ -21,6 +21,7 @@ const AboutSection = () => {
     { icon: Server, label: "Node.js" },
     { icon: Database, label: "PostgreSQL" },
     { icon: Zap, label: "Performance" },
+    { icon: BunIcon, label: "Bun" },
   ];
 
   return (
