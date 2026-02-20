@@ -61,11 +61,18 @@ const HeroSection = () => {
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </a>
             <a
-              href="#services"
-              className="px-8 py-4 border border-primary ring-2 ring-inset ring-primary text-foreground rounded-xl font-bold text-lg hover:bg-secondary transition-all"
-            >
-              View Services
-            </a>
+  href="#services"
+  className="px-8 py-4 
+             border border-primary 
+             ring-2 ring-inset ring-primary/70 
+             text-foreground rounded-xl font-bold text-lg
+             transition-all duration-300
+             hover:bg-secondary
+             hover:ring-4 hover:ring-primary
+             hover:shadow-[0_0_20px_theme(colors.primary/40)]"
+>
+  View Services
+</a>
           </motion.div>
         </motion.div>
 
