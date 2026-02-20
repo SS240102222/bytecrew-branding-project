@@ -8,86 +8,32 @@
 @tailwind utilities;
 
 /* ============================= */
-/* BASE LAYER */
+/* BASE */
 /* ============================= */
 @layer base {
-  :root {
-    /* Core Brand Colors (HSL equivalents) */
-    --background: 220 12% 14%;           /* #1F2229 */
-    --foreground: 0 0% 95%;              /* #F2F2F2 */
-
-    --card: 220 15% 18%;                 /* #252A33 */
-    --card-foreground: 0 0% 95%;
-
-    --popover: 220 15% 18%;
-    --popover-foreground: 0 0% 95%;
-
-    --primary: 158 83% 39%;              /* #10B77F */
-    --primary-foreground: 220 12% 14%;   /* #1F2229 */
-
-    --secondary: 220 15% 18%;
-    --secondary-foreground: 0 0% 95%;
-
-    --muted: 220 15% 18%;
-    --muted-foreground: 0 0% 75%;
-
-    --accent: 158 83% 39%;
-    --accent-foreground: 220 12% 14%;
-
-    --destructive: 0 70% 45%;
-    --destructive-foreground: 0 0% 95%;
-
-    --border: 220 15% 22%;
-    --input: 220 15% 22%;
-    --ring: 158 83% 39%;
-
-    --radius: 0.75rem;
-
-    /* Sidebar */
-    --sidebar-background: 220 12% 14%;
-    --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 158 83% 39%;
-    --sidebar-primary-foreground: 220 12% 14%;
-    --sidebar-accent: 220 15% 18%;
-    --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 220 15% 22%;
-    --sidebar-ring: 158 83% 39%;
-
-    /* Custom */
-    --glow-primary: 158 83% 39%;
-    --hero-overlay: 220 12% 14%;
-  }
-
-  * {
-    @apply border-border;
-  }
 
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
-    font-family: 'Lexend', sans-serif;
+    @apply bg-background text-foreground font-body antialiased;
   }
 
-  /* Headings */
   h1, h2, h3 {
-    font-family: 'Tektur', sans-serif;
-    font-weight: 800;
-    color: #F2F2F2;
+    @apply font-heading font-extrabold text-foreground;
   }
 
-  h4, h5, h6,
-  nav, button, label {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 500;
-    color: #F2F2F2;
+  h4, h5, h6 {
+    @apply font-mono font-medium text-foreground;
   }
 
-  p, span, div, li, input, textarea {
-    font-family: 'Lexend', sans-serif;
-    font-weight: 400;
+  button, nav, label {
+    @apply font-mono font-medium;
+  }
+
+  input, textarea {
+    @apply bg-card border border-border text-foreground;
   }
 }
 
@@ -96,67 +42,32 @@
 /* ============================= */
 @layer components {
 
-  /* Gradient Text (Brand Only) */
-  .gradient-text {
-    @apply bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent;
+  .btn-primary {
+    @apply bg-primary text-primary-foreground font-mono font-semibold transition-all duration-200;
   }
 
-  /* Glow Effects */
-  .glow-effect {
-    box-shadow:
-      0 0 20px hsl(var(--primary) / 0.4),
-      0 0 40px hsl(var(--primary) / 0.2);
+  .btn-primary:hover {
+    @apply bg-background text-primary shadow-glow;
   }
 
-  .glow-text {
-    text-shadow:
-      0 0 15px hsl(var(--primary) / 0.6),
-      0 0 30px hsl(var(--primary) / 0.4);
+  .nav-link {
+    @apply text-foreground transition-colors duration-200;
   }
 
-  /* Glass Card */
+  .nav-link:hover {
+    @apply text-primary;
+  }
+
   .glass-card {
     @apply bg-card border border-border backdrop-blur-lg;
   }
 
-  /* Button System */
-  .btn-primary {
-    background-color: #10B77F;
-    color: #1F2229;
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 600;
-    transition: all 0.2s ease;
-  }
-
-  .btn-primary:hover {
-    background-color: #1F2229;
-    color: #10B77F;
-    box-shadow:
-      0 0 20px rgba(16, 183, 127, 0.4),
-      0 0 40px rgba(16, 183, 127, 0.2);
-  }
-
-  /* Hover Lift */
-  .hover-lift {
-    @apply transition-transform duration-200 ease-out hover:-translate-y-1;
-  }
-
-  .section-container {
-    @apply max-w-6xl mx-auto px-6 lg:px-8;
-  }
-
-  .nav-link {
-    color: #F2F2F2;
-    transition: all 0.2s ease;
-  }
-
-  .nav-link:hover {
-    color: #10B77F;
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent;
   }
 
   .typing-cursor {
-    @apply inline-block w-[3px] h-[1em] ml-1 animate-blink;
-    background-color: #10B77F;
+    @apply inline-block w-[3px] h-[1em] ml-1 bg-primary animate-blink;
   }
 }
 
@@ -170,38 +81,7 @@
     51%, 100% { opacity: 0; }
   }
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-  }
-
-  @keyframes pulse-glow {
-    0%, 100% {
-      box-shadow: 0 0 20px rgba(16, 183, 127, 0.3);
-    }
-    50% {
-      box-shadow: 0 0 40px rgba(16, 183, 127, 0.5);
-    }
-  }
-
   .animate-blink {
     animation: blink 1s step-end infinite;
-  }
-
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-    transform: translateZ(0);
-  }
-
-  .animate-pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .animate-float,
-    .animate-blink,
-    .animate-pulse-glow {
-      animation: none;
-    }
   }
 }
