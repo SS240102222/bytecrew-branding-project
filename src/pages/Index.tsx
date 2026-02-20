@@ -4,6 +4,7 @@ import TrustBar from "@/components/TrustBar";
 import WhyByteCrew from "@/components/WhyByteCrew";
 import AboutSection from "@/components/AboutSection";
 import ProjectsSection from "@/components/ProjectsSection";
+import ServicesOverview from "@/components/ServicesOverview";
 import ServicesSection from "@/components/ServicesSection";
 import ProductsSection from "@/components/ProductsSection";
 import ContactSection from "@/components/ContactSection";
@@ -18,6 +19,7 @@ const Index = () => {
       <TrustBar />
       <WhyByteCrew />
       <ProjectsSection />
+      <ServicesOverview />
       <ServicesSection />
       <ProductsSection />
       <AboutSection />
