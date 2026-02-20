@@ -6,18 +6,21 @@ const projects = [
   {
     title: "Monal Restaurant",
     description: "A high-end rooftop dining destination showcasing panoramic city views alongside a diverse buffet and à la carte menu.",
+    outcome: "Built to establish online presence and drive dine-in traffic.",
     image: "/projects/Monal-Lahore.webp",
     url: "https://monallahore.vercel.app",
   },
   {
     title: "Edge Grooming Barbershop",
-    description: "A premium men’s barbershop website offering professional grooming services and an upscale, traditional salon experience.",
+    description: "A premium men's barbershop website offering professional grooming services and an upscale, traditional salon experience.",
+    outcome: "Designed to reduce phone inquiries with a booking-friendly layout.",
     image: "/projects/The-Edge.webp",
     url: "https://edge-grooming.vercel.app",
   },
   {
     title: "Andaaz Restaurant",
     description: "A luxury restaurant in Lahore that blends traditional heritage cuisine with iconic views of the Badshahi Mosque.",
+    outcome: "Cultural identity reflected through design to attract local diners.",
     image: "/projects/Andaaz-Restaurant.webp",
     url: "https://andaazrestaurant.vercel.app",
   },
@@ -144,9 +147,17 @@ const ProjectsSection = () => {
                   <h3 className="text-lg font-semibold mb-1 group-hover:text-primary transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">
                     {project.description}
                   </p>
+                  {project.outcome && (
+                    <div className="flex items-start gap-2">
+                      <span className="text-primary font-semibold flex-shrink-0 pt-0.5">✓</span>
+                      <p className="text-xs text-muted-foreground leading-relaxed">
+                        {project.outcome}
+                      </p>
+                    </div>
+                  )}
                 </div>
               </motion.a>
             ))}
