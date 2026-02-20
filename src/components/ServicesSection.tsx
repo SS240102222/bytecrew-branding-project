@@ -45,7 +45,12 @@ const ServicesSection = () => {
     },
   ];
 
-  
+    const guarantees = [
+    { icon: Shield, text: "Zero upfront payment" },
+    { icon: Globe, text: "Free hosting setup assistance" },
+    { icon: Clock, text: "30-day support after launch" },
+    { icon: Sparkles, text: "Pay only if satisfied" },
+  ];
 
   return (
     <section id="services" className="py-24 md:py-32 relative" ref={ref}>
