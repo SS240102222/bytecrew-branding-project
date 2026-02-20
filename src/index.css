@@ -1,104 +1,233 @@
-/* ============================= */
-/* GOOGLE FONTS */
-/* ============================= */
-@import url('https://fonts.googleapis.com/css2?family=Tektur:wght@700;800&family=JetBrains+Mono:wght@500;600&family=Lexend:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+
+
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ============================= */
-/* BASE */
-/* ============================= */
+
+
+
 @layer base {
+  :root {
+    --background: 220 20% 4%;
+    --foreground: 0 0% 95%;
+
+
+    --card: 220 18% 8%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 220 18% 8%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 160 84% 39%;
+    --primary-foreground: 220 20% 4%;
+
+    --secondary: 220 14% 14%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 220 14% 14%;
+    --muted-foreground: 220 10% 55%;
+
+    --accent: 160 84% 39%;
+    --accent-foreground: 220 20% 4%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 14% 18%;
+    --input: 220 14% 18%;
+    --ring: 160 84% 39%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 220 18% 6%;
+
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 160 84% 39%;
+    --sidebar-primary-foreground: 220 20% 4%;
+    --sidebar-accent: 220 14% 14%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 220 14% 18%;
+    --sidebar-ring: 160 84% 39%;
+
+    /* Custom tokens */
+    --glow-primary: 160 84% 39%;
+    --text-gradient-start: 160 84% 50%;
+    --text-gradient-end: 180 70% 45%;
+    --hero-overlay: 220 20% 4%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+
+
+
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+
+  }
 
   html {
     scroll-behavior: smooth;
-  }
 
-  body {
-    @apply bg-background text-foreground font-body antialiased;
-  }
 
-  /* Premium global horizontal breathing room */
-  main, section {
-    @apply px-6 md:px-10 lg:px-16;
-  }
 
-  /* Improve vertical rhythm */
-  section {
-    @apply py-16 md:py-20 lg:py-24;
-  }
 
-  h1, h2, h3 {
-    @apply font-heading font-extrabold text-foreground tracking-tight;
-  }
 
-  h4, h5, h6 {
-    @apply font-mono font-medium text-foreground;
-  }
 
-  button, nav, label {
-    @apply font-mono font-medium;
-  }
 
-  input, textarea {
-    @apply bg-card border border-border text-foreground px-4 py-3 rounded-md;
+
+
+
+
+
+
+
+
   }
 }
 
-/* ============================= */
-/* COMPONENTS */
-/* ============================= */
+
+
+
 @layer components {
 
-  /* Centered content container */
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  }
+
+
+  .glow-effect {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3),
+                0 0 40px hsl(var(--primary) / 0.15),
+                0 0 60px hsl(var(--primary) / 0.05);
+  }
+
+  .glow-text {
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.5),
+                 0 0 40px hsl(var(--primary) / 0.3);
+
+  }
+
+
+  .glass-card {
+    @apply bg-card/50 backdrop-blur-lg border border-border/50;
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .hover-lift {
+    @apply transition-transform duration-200 ease-out hover:-translate-y-1;
+
+
+
+
+
+  }
+
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+
+
+
+
+
+
+
+
+  }
+
   .section-container {
-    @apply max-w-7xl mx-auto;
-  }
-
-  .btn-primary {
-    @apply bg-primary text-primary-foreground font-mono font-semibold 
-           px-6 py-3 rounded-lg transition-all duration-200;
-  }
-
-  .btn-primary:hover {
-    @apply bg-background text-primary shadow-glow;
+    @apply max-w-6xl mx-auto px-6 lg:px-8;
   }
 
   .nav-link {
-    @apply text-foreground transition-colors duration-200;
-  }
+    @apply text-muted-foreground hover:text-foreground transition-colors duration-200;
 
-  .nav-link:hover {
-    @apply text-primary;
-  }
 
-  .glass-card {
-    @apply bg-card border border-border backdrop-blur-lg 
-           rounded-xl p-6 md:p-8;
-  }
 
-  .gradient-text {
-    @apply bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent;
+
+
   }
 
   .typing-cursor {
-    @apply inline-block w-[3px] h-[1em] ml-1 bg-primary animate-blink;
+    @apply inline-block w-[3px] h-[1em] bg-primary ml-1 animate-blink;
+
   }
 }
 
-/* ============================= */
-/* UTILITIES */
-/* ============================= */
+
+
+
 @layer utilities {
 
   @keyframes blink {
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0; }
+@@ -121,8 +176,12 @@
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px hsl(var(--primary) / 0.3); }
+    50% { box-shadow: 0 0 40px hsl(var(--primary) / 0.5); }
+
+
+
+
   }
 
   .animate-blink {
-    animation: blink 1s step-end infinite;
+@@ -132,43 +191,17 @@
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-float {
+      animation: none;
+    }
+    
+    .animate-blink {
+      animation: none;
+    }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.4s ease-out forwards;
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in-up {
+
+
+      animation: none;
+      opacity: 1;
+    }
   }
 }
