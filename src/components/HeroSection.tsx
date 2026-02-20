@@ -39,15 +39,14 @@ const HeroSection = () => {
             Creative Vision. Technical Precision.
           </motion.p>
 
-          {/* Bold subheadline (2 lines) */}
+          {/* Subheadline */}
           <motion.p
-            className="text-base md:text-lg text-foreground max-w-2xl mx-auto mb-10 font-semibold leading-relaxed"
+            className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
           >
-            <span className="block">Zero Upfront Payment.</span>
-            <span className="block">Pay Only If Satisfied.</span>
+            We deliver results that matter. Fast, reliable, and backed by our satisfaction guarantee.
           </motion.p>
 
           {/* CTA Buttons */}
