@@ -20,8 +20,18 @@
     @apply bg-background text-foreground font-body antialiased;
   }
 
+  /* Premium global horizontal breathing room */
+  main, section {
+    @apply px-6 md:px-10 lg:px-16;
+  }
+
+  /* Improve vertical rhythm */
+  section {
+    @apply py-16 md:py-20 lg:py-24;
+  }
+
   h1, h2, h3 {
-    @apply font-heading font-extrabold text-foreground;
+    @apply font-heading font-extrabold text-foreground tracking-tight;
   }
 
   h4, h5, h6 {
@@ -33,7 +43,7 @@
   }
 
   input, textarea {
-    @apply bg-card border border-border text-foreground;
+    @apply bg-card border border-border text-foreground px-4 py-3 rounded-md;
   }
 }
 
@@ -42,8 +52,14 @@
 /* ============================= */
 @layer components {
 
+  /* Centered content container */
+  .section-container {
+    @apply max-w-7xl mx-auto;
+  }
+
   .btn-primary {
-    @apply bg-primary text-primary-foreground font-mono font-semibold transition-all duration-200;
+    @apply bg-primary text-primary-foreground font-mono font-semibold 
+           px-6 py-3 rounded-lg transition-all duration-200;
   }
 
   .btn-primary:hover {
@@ -59,7 +75,8 @@
   }
 
   .glass-card {
-    @apply bg-card border border-border backdrop-blur-lg;
+    @apply bg-card border border-border backdrop-blur-lg 
+           rounded-xl p-6 md:p-8;
   }
 
   .gradient-text {
