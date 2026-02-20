@@ -11,7 +11,6 @@ export default {
   prefix: "",
   theme: {
     container: {
-@@ -13,60 +18,73 @@
       },
     },
     extend: {
@@ -75,25 +74,16 @@ export default {
       },
 
 
-
-
-
-
-
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
-
-
-
 
       },
 
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
-@@ -89,14 +107,15 @@
           to: { opacity: "1", transform: "scale(1)" },
         },
       },
