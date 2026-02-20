@@ -43,7 +43,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
           >
-            Zero Upfront Payment. Pay Only If Satisfied. Lahore-based. Founder-led.
+            Zero Upfront Payment.    Pay Only If Satisfied.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -62,7 +62,7 @@ const HeroSection = () => {
             </a>
             <a
               href="#services"
-              className="px-8 py-4 border border-border text-foreground rounded-xl font-semibold text-lg hover:bg-secondary transition-all hover:border-primary/50"
+              className="px-16 py-8 border border-border text-foreground rounded-xl font-bold text-lg hover:bg-secondary transition-all hover:border-primary/50"
             >
               View Services
             </a>
