@@ -17,29 +17,33 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          {/* Subtitle */}
-          <motion.p
-            className="text-muted-foreground text-lg md:text-xl mb-4 font-mono"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+          {/* Main headline */}
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 relative max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            <TypingEffect text="Web Development Studio" speed={80} delay={300} />
-          </motion.p>
-
-          {/* Main Name */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 relative">
-            <NameHoverEffect name="ByteCrew" />
+            Smart, Cost-Effective Web & Tech Solutions.
           </h1>
 
-          {/* One-liner */}
+          {/* Tagline - secondary */}
           <motion.p
-            className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-10"
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-4 italic"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+          >
+            Creative Vision. Technical Precision.
+          </motion.p>
+
+          {/* Bold subheadline */}
+          <motion.p
+            className="text-base md:text-lg text-foreground max-w-2xl mx-auto mb-10 font-semibold"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
           >
-            Creative Vision. Technical Precision.
+            Zero Upfront Payment. Pay Only If Satisfied. Lahore-based. Founder-led.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -50,17 +54,17 @@ const HeroSection = () => {
             transition={{ delay: 0.8, duration: 0.6 }}
           >
             <a
-              href="#services"
+              href="#contact"
               className="group px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold text-lg hover:bg-primary/90 transition-all hover:shadow-xl hover:shadow-primary/25 flex items-center gap-2"
             >
-              Our Services
+              Get Free Consultation
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </a>
             <a
-              href="#contact"
+              href="#services"
               className="px-8 py-4 border border-border text-foreground rounded-xl font-semibold text-lg hover:bg-secondary transition-all hover:border-primary/50"
             >
-              Get in Touch
+              View Services
             </a>
           </motion.div>
         </motion.div>
