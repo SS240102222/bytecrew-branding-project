@@ -6,7 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Index from "./pages/Index";
 
-// Lazy load policy pages for better initial load performance
+// Lazy load pages for better initial load performance
+const Services = lazy(() => import("./pages/Services"));
 const Tags = lazy(() => import("./pages/Tags"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const ReturnRefundPolicy = lazy(() => import("./pages/ReturnRefundPolicy"));
@@ -25,6 +26,7 @@ const App = () => (
         <Suspense fallback={<div className="min-h-screen bg-background" />}>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/services" element={<Services />} />
             <Route path="/tags" element={<Tags />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/return-refund-policy" element={<ReturnRefundPolicy />} />
