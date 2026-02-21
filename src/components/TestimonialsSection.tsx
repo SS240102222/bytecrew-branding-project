@@ -109,7 +109,7 @@ const TestimonialsSection = () => {
                     testimonial.initials
                   )} w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0`}
                 >
-                  <span className="text-white font-semibold text-sm">
+                  <span className="text-primary-foreground font-semibold text-sm">
                     {testimonial.initials}
                   </span>
                 </div>
