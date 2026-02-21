@@ -56,7 +56,7 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section id="testimonials" className="py-24 md:py-32 relative" ref={ref}>
+    <section id="testimonials" className="py-16 md:py-20 relative" ref={ref}>
       {/* Subtle dark card tone background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background to-secondary/5" />
 

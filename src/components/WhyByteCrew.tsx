@@ -69,7 +69,7 @@ const WhyByteCrew = () => {
   };
 
   return (
-    <section className="py-20 md:py-28 relative bg-background">
+    <section className="py-16 md:py-20 relative bg-background">
       <div className="section-container">
         {/* Header */}
         <motion.div

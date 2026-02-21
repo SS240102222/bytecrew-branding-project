@@ -25,7 +25,7 @@ const ServicesOverview = () => {
   ];
 
   return (
-    <section id="services-overview" className="py-24 md:py-32 relative" ref={ref}>
+    <section id="services-overview" className="py-16 md:py-20 relative" ref={ref}>
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/5 to-background" />
 
       <div className="section-container relative z-10">
