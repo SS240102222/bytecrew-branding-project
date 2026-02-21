@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 
 // Lazy load pages for better initial load performance
 const Services = lazy(() => import("./pages/Services"));
+const Packages = lazy(() => import("./pages/Packages"));
 const Tags = lazy(() => import("./pages/Tags"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const ReturnRefundPolicy = lazy(() => import("./pages/ReturnRefundPolicy"));
@@ -27,6 +28,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/packages" element={<Packages />} />
             <Route path="/tags" element={<Tags />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/return-refund-policy" element={<ReturnRefundPolicy />} />
