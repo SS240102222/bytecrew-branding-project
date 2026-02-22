@@ -13,18 +13,12 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    minify: "terser",
-    terserOptions: {
-      compress: {
-        drop_console: mode === "production",
-      },
-    },
+    minify: "esbuild",
     cssMinify: true,
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ["react", "react-dom", "react-router-dom"],
-          ui: ["@radix-ui/react-accordion", "@radix-ui/react-dialog", "@radix-ui/react-dropdown-menu"],
         },
       },
     },
