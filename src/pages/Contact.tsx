@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+import { updateMetaTags, getCanonicalUrl } from "@/utils/seo";
 import { Mail, MapPin, MessageCircle, MessageSquare, Phone, CheckCircle } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -16,6 +17,16 @@ import {
 } from "@/components/ui/select";
 
 const Contact = () => {
+  useEffect(() => {
+    updateMetaTags({
+      title: "Contact ByteCrew | Free Consultation, No Commitment",
+      description: "Get in touch with ByteCrew via WhatsApp or email. Free consultation, zero pressure. Based in Lahore, serving clients in Pakistan and worldwide.",
+      canonical: getCanonicalUrl("/contact"),
+      ogTitle: "Contact ByteCrew | Free Consultation, No Commitment",
+      ogDescription: "Get in touch with ByteCrew via WhatsApp or email. Free consultation, zero pressure. Based in Lahore, serving clients in Pakistan and worldwide.",
+    });
+  }, []);
+
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [formData, setFormData] = useState({
