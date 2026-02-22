@@ -10,6 +10,7 @@ import Index from "./pages/Index";
 const Services = lazy(() => import("./pages/Services"));
 const Packages = lazy(() => import("./pages/Packages"));
 const Portfolio = lazy(() => import("./pages/Portfolio"));
+const Contact = lazy(() => import("./pages/Contact"));
 const Tags = lazy(() => import("./pages/Tags"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const ReturnRefundPolicy = lazy(() => import("./pages/ReturnRefundPolicy"));
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/services" element={<Services />} />
             <Route path="/packages" element={<Packages />} />
             <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/tags" element={<Tags />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/return-refund-policy" element={<ReturnRefundPolicy />} />
