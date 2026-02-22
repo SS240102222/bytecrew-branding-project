@@ -133,9 +133,12 @@ const ProjectsSection = () => {
                 <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
                   <img
                     src={project.image}
-                    alt={`${project.title} preview`}
+                    alt={`ByteCrew — ${project.title} website design`}
                     className="w-full h-full object-cover"
                     loading="lazy"
+                    width={350}
+                    height={197}
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-card/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-end p-3">
                     <ExternalLink className="w-5 h-5 text-foreground" />

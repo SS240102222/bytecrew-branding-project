@@ -39,7 +39,14 @@ const Navigation = () => {
     >
       <div className="section-container flex items-center justify-between">
         <a href="https://bytecrew.vercel.app" className="flex items-center gap-2 text-xl font-bold text-foreground hover:text-primary transition-colors">
-          <img src="/logo-removebg-preview.png" alt="ByteCrew Logo" className="h-8 w-8 object-contain" />
+          <img 
+            src="/logo-removebg-preview.png" 
+            alt="ByteCrew Logo" 
+            className="h-8 w-8 object-contain" 
+            width={32}
+            height={32}
+            decoding="async"
+          />
           ByteCrew
         </a>
         

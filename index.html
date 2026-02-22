@@ -2,11 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
     <title>ByteCrew | Smart Web & Tech Solutions in Lahore, Pakistan</title>
     <meta name="description" content="Lahore-based web development, custom PC builds, and repairs. Zero upfront payment. Pay only when satisfied. Founder-led, cost-efficient, performance-focused." />
     <meta name="author" content="ByteCrew" />
     <link rel="canonical" href="https://bytecrew.dev/" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/lexend/v20/ga6eM15Ze1P7_VVAjSmVZ3o-aY-eM2TfO4lT_Rq8dZyf9HgB.woff2" crossorigin="anonymous" />
+    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/tektur/v21/QdVoZShaLPfJuJ_f8RjKQHc0xMsQ.woff2" crossorigin="anonymous" />
 
     <meta property="og:title" content="ByteCrew | Smart Web & Tech Solutions in Lahore, Pakistan" />
     <meta property="og:description" content="Lahore-based web development, custom PC builds, and repairs. Zero upfront payment. Pay only when satisfied. Founder-led, cost-efficient, performance-focused." />
@@ -16,10 +22,14 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="ByteCrew | Smart Web & Tech Solutions in Lahore, Pakistan" />
     <meta name="twitter:description" content="Lahore-based web development, custom PC builds, and repairs. Zero upfront payment. Pay only when satisfied." />
+    
+    <!-- Performance optimization hints -->
+    <meta name="theme-color" content="#0f1419" />
+    <link rel="icon" type="image/svg+xml" href="/logo.png" />
   </head>
 
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="/src/main.tsx" defer></script>
   </body>
 </html>

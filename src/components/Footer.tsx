@@ -34,6 +34,7 @@ const Footer = () => {
               width={80}
               height={80}
               className="object-contain"
+              decoding="async"
             />
           </motion.div>
 
