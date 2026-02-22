@@ -122,8 +122,7 @@ const ContactSection = () => {
                     {info.href ? (
                       <a
                         href={info.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        {...(info.href.startsWith('http') && { target: "_blank", rel: "noopener noreferrer" })}
                         className="font-medium hover:text-primary transition-colors"
                       >
                         {info.value}

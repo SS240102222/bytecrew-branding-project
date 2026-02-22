@@ -1,78 +1,72 @@
 import { motion } from "framer-motion";
-import { Mail, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <footer className="py-12 border-t border-border">
       <div className="section-container">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        {/* Main Footer Content */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-8 pb-8 border-b border-border">
+          {/* Left: ByteCrew Logo/Name */}
           <motion.div
-            className="text-center md:text-left"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="flex items-center gap-2"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-          >
-            <p className="text-xl font-bold text-foreground mb-2">ByteCrew</p>
-            <p className="text-sm text-muted-foreground">
-              © 2025 ByteCrew. Built with Next.js & Tailwind.
-            </p>
-          </motion.div>
-
-          {/* Logo Section */}
-          <motion.div
-            className="flex items-center justify-center"
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.05, duration: 0.5 }}
           >
             <img
               src="/logo-removebg-preview.png"
               alt="ByteCrew Logo"
-              width={80}
-              height={80}
+              width={32}
+              height={32}
               className="object-contain"
               decoding="async"
             />
+            <span className="text-lg font-bold text-foreground">ByteCrew</span>
           </motion.div>
 
+          {/* Center: Navigation Links */}
           <motion.div
-            className="flex flex-col sm:flex-row items-center gap-6 text-sm text-muted-foreground"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="flex flex-wrap items-center justify-center gap-6 md:gap-8"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1, duration: 0.5 }}
           >
-            <a
-              href="mailto:bytecrew.team@gmail.com"
-              className="flex items-center gap-2 hover:text-primary transition-colors"
-            >
-              <Mail className="w-4 h-4" />
-              bytecrew.team@gmail.com
-            </a>
-            <span className="flex items-center gap-2">
-              <MapPin className="w-4 h-4" />
-              Lahore, Pakistan
-            </span>
+            <Link to="/" className="text-sm text-muted-foreground hover:text-primary transition-colors">Home</Link>
+            <Link to="/services" className="text-sm text-muted-foreground hover:text-primary transition-colors">Services</Link>
+            <Link to="/packages" className="text-sm text-muted-foreground hover:text-primary transition-colors">Packages</Link>
+            <Link to="/portfolio" className="text-sm text-muted-foreground hover:text-primary transition-colors">Portfolio</Link>
+            <Link to="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">About</Link>
+            <Link to="/contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">Contact</Link>
           </motion.div>
+
+          {/* Right: WhatsApp Link */}
+          <motion.a
+            href="https://wa.me/923390053646?text=Hi%20ByteCrew%2C%20I%27d%20like%20a%20free%20consultation"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            WhatsApp
+          </motion.a>
         </div>
 
+        {/* Bottom: Copyright and Location */}
         <motion.div
-          className="flex flex-wrap items-center justify-center gap-4 mt-8 pt-6 border-t border-border text-sm text-muted-foreground"
+          className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
-          <Link to="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</Link>
-          <span className="text-border">|</span>
-          <Link to="/return-refund-policy" className="hover:text-primary transition-colors">Return/Refund Policy</Link>
-          <span className="text-border">|</span>
-          <Link to="/shipping-service-policy" className="hover:text-primary transition-colors">Shipping & Service Policy</Link>
-          <span className="text-border">|</span>
-          <Link to="/terms-conditions" className="hover:text-primary transition-colors">Terms & Conditions</Link>
+          <p>© 2026 ByteCrew. All rights reserved.</p>
+          <p>Lahore, Pakistan — Serving clients locally and worldwide.</p>
         </motion.div>
       </div>
     </footer>

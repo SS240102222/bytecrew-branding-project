@@ -36,7 +36,9 @@ const CTASection = () => {
 
           {/* Primary CTA Button */}
           <motion.a
-            href="#contact"
+            href="https://wa.me/923390053646?text=Hi%20ByteCrew%2C%20I%27m%20interested%20in%20starting%20a%20project"
+            target="_blank"
+            rel="noopener noreferrer"
             className="group px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold text-lg hover:bg-primary/90 transition-all hover:shadow-xl hover:shadow-primary/25 flex items-center gap-2 mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}

@@ -208,14 +208,12 @@ const About = () => {
               Tell us about your project. We'll give you honest advice, a clear scope, and a fair price. Zero upfront payment. Zero pressure.
             </p>
             <motion.a
-              href="https://wa.me/923390053646"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/contact"
               className="group px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold text-lg hover:bg-primary/90 transition-all hover:shadow-xl hover:shadow-primary/25 flex items-center gap-2"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >
-              Get Free Consultation
+              Get in Touch
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </motion.a>
           </motion.div>
