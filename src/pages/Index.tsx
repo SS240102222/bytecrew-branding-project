@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import TrustBar from "@/components/TrustBar";
@@ -13,8 +14,19 @@ import ProductsSection from "@/components/ProductsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { updateMetaTags, getCanonicalUrl } from "@/utils/seo";
 
 const Index = () => {
+  useEffect(() => {
+    updateMetaTags({
+      title: "ByteCrew | Smart Web & Tech Solutions in Lahore, Pakistan",
+      description: "Lahore-based web development, custom PC builds, and repairs. Zero upfront payment. Pay only when satisfied. Founder-led, cost-efficient, performance-focused.",
+      canonical: getCanonicalUrl("/"),
+      ogTitle: "ByteCrew | Smart Web & Tech Solutions in Lahore, Pakistan",
+      ogDescription: "Lahore-based web development, custom PC builds, and repairs. Zero upfront payment. Pay only when satisfied. Founder-led, cost-efficient, performance-focused.",
+    });
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navigation />
