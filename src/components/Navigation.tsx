@@ -25,7 +25,7 @@ const Navigation = () => {
     { href: "/packages", label: "Packages" },
     { href: "/portfolio", label: "Portfolio" },
     { href: "#about", label: "About Us" },
-    { href: "#contact", label: "Contact" },
+    { href: "/contact", label: "Contact" },
   ];
   
   return (
@@ -51,7 +51,7 @@ const Navigation = () => {
           ))}
         </div>
         
-        <a href="#contact" className="hidden md:inline-flex px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-primary/25">
+        <a href="/contact" className="hidden md:inline-flex px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-primary/25">
           Let's Talk
         </a>
       </div>
