@@ -20,11 +20,11 @@ const Navigation = () => {
   }, []);
   
   const navLinks = [
-    { href: "#projects", label: "Projects" },
+    { href: "/", label: "Home" },
     { href: "/services", label: "Services" },
     { href: "/packages", label: "Packages" },
     { href: "/portfolio", label: "Portfolio" },
-    { href: "#about", label: "About Us" },
+    { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
   
@@ -38,7 +38,7 @@ const Navigation = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="section-container flex items-center justify-between">
-        <a href="https://bytecrew.vercel.app" className="flex items-center gap-2 text-xl font-bold text-foreground hover:text-primary transition-colors">
+        <a href="/" className="flex items-center gap-2 text-xl font-bold text-foreground hover:text-primary transition-colors">
           <img 
             src="/logo-removebg-preview.png" 
             alt="ByteCrew Logo" 
