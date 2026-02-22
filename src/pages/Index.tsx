@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
-import TrustBar from "@/components/TrustBar";
+
 import WhyByteCrew from "@/components/WhyByteCrew";
 import AboutSection from "@/components/AboutSection";
 import ProjectsSection from "@/components/ProjectsSection";
@@ -31,7 +31,6 @@ const Index = () => {
     <div className="min-h-screen bg-background text-foreground">
       <Navigation />
       <HeroSection />
-      <TrustBar />
       <WhyByteCrew />
       <ProjectsSection />
       <ServicesOverview />

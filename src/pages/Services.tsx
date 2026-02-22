@@ -4,6 +4,7 @@ import { updateMetaTags, getCanonicalUrl } from "@/utils/seo";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import TrustBar from "@/components/TrustBar";
 
 const ServiceCard = ({ title, body, isInView, index }: { title: string; body: string; isInView: boolean; index: number }) => (
   <motion.div
@@ -160,6 +161,9 @@ const Services = () => {
           </motion.div>
         </div>
       </motion.section>
+
+      {/* Trust Bar */}
+      <TrustBar />
 
       {/* Main Content */}
       <section className="py-16 md:py-20 relative" ref={sectionRef}>

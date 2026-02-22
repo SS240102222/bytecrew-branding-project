@@ -9,10 +9,10 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 const Portfolio = () => {
   useEffect(() => {
     updateMetaTags({
-      title: "Our Work | Web Projects & PC Builds — ByteCrew",
+      title: "Our Projects | Web Projects & PC Builds — ByteCrew",
       description: "See websites we've built, PC builds we've specced, and before/after optimization results. Real work, real outcomes, no fluff.",
-      canonical: getCanonicalUrl("/portfolio"),
-      ogTitle: "Our Work | Web Projects & PC Builds — ByteCrew",
+      canonical: getCanonicalUrl("/projects"),
+      ogTitle: "Our Projects | Web Projects & PC Builds — ByteCrew",
       ogDescription: "See websites we've built, PC builds we've specced, and before/after optimization results. Real work, real outcomes, no fluff.",
     });
   }, []);
@@ -97,7 +97,7 @@ const Portfolio = () => {
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight font-serif">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight font-serif">Our Projects
               Our Work.
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl">
