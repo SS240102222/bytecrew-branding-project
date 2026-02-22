@@ -5,23 +5,23 @@ const WhyByteCrew = () => {
   const comparisonRows = [
     {
       feature: "Payment Terms",
-      others: "Advance required",
       bytecrw: "0% upfront",
+      others: "Advance required",
     },
     {
       feature: "Build Quality",
-      others: "Basic delivery",
       bytecrw: "Optimized builds",
+      others: "Basic delivery",
     },
     {
       feature: "After Delivery",
-      others: "Gone after handoff",
       bytecrw: "30-day support",
+      others: "Gone after handoff",
     },
     {
       feature: "Overhead",
-      others: "Expensive agencies",
       bytecrw: "Cost-efficient startup",
+      others: "Expensive agencies",
     },
   ];
 
@@ -89,46 +89,72 @@ const WhyByteCrew = () => {
 
         {/* Part 1: Comparison Table */}
         <motion.div
-          className="mb-16 overflow-x-auto"
+          className="mb-16"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={containerVariants}
         >
-          <table className="w-full min-w-[500px]">
-            <thead>
-              <tr className="border-b border-border/50">
-                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
-                  Feature
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-muted-foreground">
-                  Others
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-primary">
-                  ByteCrew
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {comparisonRows.map((row, index) => (
-                <motion.tr
-                  key={row.feature}
-                  variants={itemVariants}
-                  className="border-b border-border/30 hover:bg-card/30 transition-colors"
-                >
-                  <td className="px-6 py-4 text-sm font-medium text-foreground">
-                    {row.feature}
-                  </td>
-                  <td className="px-6 py-4 text-sm text-muted-foreground">
-                    {row.others}
-                  </td>
-                  <td className="px-6 py-4 text-sm font-semibold text-primary bg-primary/5 rounded">
+          {/* Desktop Table */}
+          <div className="hidden md:block overflow-x-auto">
+            <table className="w-full min-w-[500px]">
+              <thead>
+                <tr className="border-b border-border/50">
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
+                    Feature
+                  </th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-primary">
+                    ByteCrew
+                  </th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-muted-foreground">
+                    Others
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {comparisonRows.map((row, index) => (
+                  <motion.tr
+                    key={row.feature}
+                    variants={itemVariants}
+                    className="border-b border-border/30 hover:bg-card/30 transition-colors"
+                  >
+                    <td className="px-6 py-4 text-sm font-medium text-foreground">
+                      {row.feature}
+                    </td>
+                    <td className="px-6 py-4 text-sm font-semibold text-primary bg-primary/5 rounded">
+                      {row.bytecrw}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-muted-foreground">
+                      {row.others}
+                    </td>
+                  </motion.tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile: Stacked Cards */}
+          <div className="md:hidden space-y-4">
+            {comparisonRows.map((row, index) => (
+              <motion.div
+                key={row.feature}
+                variants={itemVariants}
+                className="bg-card/40 border border-border/50 rounded-lg p-4 hover:border-primary/40 transition-colors"
+              >
+                <p className="text-xs text-muted-foreground font-medium mb-2 uppercase tracking-wider">
+                  {row.feature}
+                </p>
+                <div className="space-y-2">
+                  <p className="text-sm font-semibold text-primary">
                     {row.bytecrw}
-                  </td>
-                </motion.tr>
-              ))}
-            </tbody>
-          </table>
+                  </p>
+                  <p className="text-sm text-muted-foreground line-through opacity-60">
+                    {row.others}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
         {/* Part 2: Four Cards in 2x2 Grid */}
