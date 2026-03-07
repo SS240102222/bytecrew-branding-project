@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
 import { ArrowDown, ArrowRight } from "lucide-react";
-import NameHoverEffect from "./NameHoverEffect";
-import TypingEffect from "./TypingEffect";
 
 const HeroSection = () => {
   return (

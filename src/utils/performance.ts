@@ -7,7 +7,7 @@
 export const reportWebVitals = (metric: any) => {
   if (typeof window !== 'undefined') {
     // Minimal logging - log only critical metrics exceeding thresholds
-    if (metric.value > metric.rating === 'poor') {
+    if (metric.rating === 'poor') {
       console.warn(`[Performance] ${metric.name}: ${metric.value}ms (${metric.rating})`);
     }
   }

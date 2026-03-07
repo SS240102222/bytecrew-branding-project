@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { MessageSquare, Globe, Briefcase, ShoppingCart, RefreshCw, CheckCircle, Clock, Shield, Sparkles } from "lucide-react";
+import { MessageSquare, Globe, Briefcase, ShoppingCart, RefreshCw, CheckCircle, Clock } from "lucide-react";
 
 const ServicesSection = () => {
   const ref = useRef(null);
@@ -45,13 +45,6 @@ const ServicesSection = () => {
     },
   ];
 
-    const guarantees = [
-    { icon: Shield, text: "Zero upfront payment" },
-    { icon: Globe, text: "Free hosting setup assistance" },
-    { icon: Clock, text: "30-day support after launch" },
-    { icon: Sparkles, text: "Pay only if satisfied" },
-  ];
-
   return (
     <section id="services" className="py-16 md:py-20 relative" ref={ref}>
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background" />
@@ -75,24 +68,6 @@ const ServicesSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             What We <span className="text-primary">Offer</span>
           </h2>
-        </motion.div>
-
-        {/* Guarantees Banner */}
-        <motion.div
-          className="glass-card rounded-2xl p-5 mb-12 max-w-5xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.15, duration: 0.5 }}
-        >
-          <p className="text-center text-sm font-semibold text-primary mb-3">✅ All Packages Include</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {guarantees.map((g) => (
-              <div key={g.text} className="flex items-center gap-2 justify-center text-sm text-muted-foreground">
-                <g.icon className="w-4 h-4 text-primary shrink-0" />
-                <span>{g.text}</span>
-              </div>
-            ))}
-          </div>
         </motion.div>
 
         {/* Services Grid */}

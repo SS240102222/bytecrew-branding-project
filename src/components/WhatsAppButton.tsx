@@ -1,20 +1,11 @@
-'use client';
-
-import { useState } from 'react';
-
 const WhatsAppButton = () => {
-  const [showTooltip, setShowTooltip] = useState(false);
-
   return (
     <div className="fixed bottom-6 right-6 z-50 group">
-      {/* Desktop Tooltip */}
-      {showTooltip && (
-        <div className="absolute right-20 top-1/2 -translate-y-1/2 bg-card text-foreground px-3 py-2 rounded-md text-sm whitespace-nowrap shadow-md pointer-events-none">
-          Chat with us on WhatsApp
-          {/* Tooltip arrow */}
-          <div className="absolute -right-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-card transform rotate-45"></div>
-        </div>
-      )}
+      {/* CSS-only Tooltip */}
+      <div className="absolute right-20 top-1/2 -translate-y-1/2 bg-card text-foreground px-3 py-2 rounded-md text-sm whitespace-nowrap shadow-md pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        Chat with us on WhatsApp
+        <div className="absolute -right-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-card transform rotate-45"></div>
+      </div>
       
       {/* FAB Button */}
       <a
@@ -22,11 +13,8 @@ const WhatsAppButton = () => {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with us on WhatsApp"
-        onMouseEnter={() => setShowTooltip(true)}
-        onMouseLeave={() => setShowTooltip(false)}
-        className="flex items-center justify-center w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg hover:shadow-xl hover:bg-primary/90"
+        className="flex items-center justify-center w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg hover:shadow-xl hover:bg-primary/90 transition-all"
       >
-        {/* Official WhatsApp Icon */}
         <svg
           viewBox="0 0 24 24"
           fill="currentColor"

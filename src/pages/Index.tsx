@@ -1,20 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
-
+import TrustBar from "@/components/TrustBar";
 import WhyByteCrew from "@/components/WhyByteCrew";
-import AboutSection from "@/components/AboutSection";
-import ProjectsSection from "@/components/ProjectsSection";
-import ServicesOverview from "@/components/ServicesOverview";
-import OurApproach from "@/components/OurApproach";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import CTASection from "@/components/CTASection";
-import ServicesSection from "@/components/ServicesSection";
-import ProductsSection from "@/components/ProductsSection";
-import ContactSection from "@/components/ContactSection";
-import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import { updateMetaTags, getCanonicalUrl } from "@/utils/seo";
+
+// Lazy load below-the-fold sections
+const ProjectsSection = lazy(() => import("@/components/ProjectsSection"));
+const ServicesOverview = lazy(() => import("@/components/ServicesOverview"));
+const OurApproach = lazy(() => import("@/components/OurApproach"));
+const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"));
+const CTASection = lazy(() => import("@/components/CTASection"));
+const ServicesSection = lazy(() => import("@/components/ServicesSection"));
+const ProductsSection = lazy(() => import("@/components/ProductsSection"));
+const AboutSection = lazy(() => import("@/components/AboutSection"));
+const ContactSection = lazy(() => import("@/components/ContactSection"));
+const Footer = lazy(() => import("@/components/Footer"));
+const WhatsAppButton = lazy(() => import("@/components/WhatsAppButton"));
 
 const Index = () => {
   useEffect(() => {
@@ -31,18 +33,21 @@ const Index = () => {
     <div className="min-h-screen bg-background text-foreground">
       <Navigation />
       <HeroSection />
+      <TrustBar />
       <WhyByteCrew />
-      <ProjectsSection />
-      <ServicesOverview />
-      <OurApproach />
-      <TestimonialsSection />
-      <CTASection />
-      <ServicesSection />
-      <ProductsSection />
-      <AboutSection />
-      <ContactSection />
-      <Footer />
-      <WhatsAppButton />
+      <Suspense fallback={<div className="min-h-[200px]" />}>
+        <ProjectsSection />
+        <ServicesOverview />
+        <OurApproach />
+        <TestimonialsSection />
+        <CTASection />
+        <ServicesSection />
+        <ProductsSection />
+        <AboutSection />
+        <ContactSection />
+        <Footer />
+        <WhatsAppButton />
+      </Suspense>
     </div>
   );
 };
