@@ -146,6 +146,17 @@
     backface-visibility: hidden;
   }
 
+  .animate-fade-in-down {
+    animation: fade-in-down 0.5s ease-out forwards;
+    opacity: 0;
+    backface-visibility: hidden;
+  }
+
+  .animate-bounce-slow {
+    animation: bounce-slow 2s ease-in-out infinite;
+    animation-delay: 1.2s;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .animate-float,
     .animate-blink,
