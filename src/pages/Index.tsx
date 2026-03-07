@@ -6,7 +6,6 @@ import WhyByteCrew from "@/components/WhyByteCrew";
 import { updateMetaTags, getCanonicalUrl } from "@/utils/seo";
 
 // Lazy load below-the-fold sections
-const ProjectsSection = lazy(() => import("@/components/ProjectsSection"));
 const ServicesOverview = lazy(() => import("@/components/ServicesOverview"));
 const OurApproach = lazy(() => import("@/components/OurApproach"));
 const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"));
@@ -36,7 +35,6 @@ const Index = () => {
       <TrustBar />
       <WhyByteCrew />
       <Suspense fallback={<div className="min-h-[200px]" />}>
-        <ProjectsSection />
         <ServicesOverview />
         <OurApproach />
         <TestimonialsSection />
