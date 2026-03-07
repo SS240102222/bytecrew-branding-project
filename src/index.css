@@ -146,6 +146,17 @@
     backface-visibility: hidden;
   }
 
+  .animate-fade-in-down {
+    animation: fade-in-down 0.5s ease-out forwards;
+    opacity: 0;
+    backface-visibility: hidden;
+  }
+
+  .animate-bounce-slow {
+    animation: bounce-slow 2s ease-in-out infinite;
+    animation-delay: 1.2s;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .animate-float,
     .animate-blink,
@@ -191,4 +202,20 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
 }

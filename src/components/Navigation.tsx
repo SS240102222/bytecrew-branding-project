@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+
   useEffect(() => {
     let ticking = false;
     const handleScroll = () => {
@@ -20,7 +20,7 @@ const Navigation = () => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  
+
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/services", label: "Services" },
@@ -29,29 +29,27 @@ const Navigation = () => {
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
-  
+
   return (
-    <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 animate-fade-in-down ${
         isScrolled ? "glass-card py-4" : "py-6"
       }`}
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="section-container flex items-center justify-between">
         <a href="/" className="flex items-center gap-2 text-xl font-bold text-foreground hover:text-primary transition-colors">
-          <img 
-            src="/logo-removebg-preview.png" 
-            alt="ByteCrew Logo" 
-            className="h-8 w-8 object-contain" 
+          <img
+            src="/logo-removebg-preview.png"
+            alt="ByteCrew Logo"
+            className="h-8 w-8 object-contain"
             width={32}
             height={32}
             decoding="async"
+            fetchPriority="high"
           />
           ByteCrew
         </a>
-        
+
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a key={link.href} href={link.href} className="nav-link text-sm font-medium uppercase tracking-wider">
@@ -59,26 +57,20 @@ const Navigation = () => {
             </a>
           ))}
         </div>
-        
+
         <a href="/contact" className="hidden md:inline-flex px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-primary/25">
           Let's Talk
         </a>
 
-        {/* Mobile Menu Button */}
         <button
           className="md:hidden p-2 hover:bg-primary/10 rounded-lg transition-colors"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
         >
-          {isMenuOpen ? (
-            <X className="w-6 h-6 text-foreground" />
-          ) : (
-            <Menu className="w-6 h-6 text-foreground" />
-          )}
+          {isMenuOpen ? <X className="w-6 h-6 text-foreground" /> : <Menu className="w-6 h-6 text-foreground" />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -110,7 +102,7 @@ const Navigation = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </nav>
   );
 };
 
