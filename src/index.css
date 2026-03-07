@@ -96,9 +96,8 @@
   }
 
   .glass-card {
-    @apply bg-card/50 backdrop-blur-lg border border-border/50;
+    @apply bg-card/80 border border-border/50;
     transform: translateZ(0);
-    will-change: transform;
   }
 
   .hover-lift {

@@ -162,8 +162,6 @@ const Services = () => {
         </div>
       </motion.section>
 
-      {/* Trust Bar */}
-      <TrustBar />
 
       {/* Main Content */}
       <section className="py-16 md:py-20 relative" ref={sectionRef}>
