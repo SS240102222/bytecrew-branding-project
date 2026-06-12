@@ -36,6 +36,8 @@ const Contact = () => {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -46,14 +48,43 @@ const Contact = () => {
     setFormData((prev) => ({ ...prev, service: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would send data to a backend
-    setSubmitted(true);
-    setTimeout(() => {
-      setFormData({ name: "", contact: "", service: "", message: "" });
-      setSubmitted(false);
-    }, 3000);
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "e6a57735-3e0b-48f6-846f-55db3515c04e",
+          subject: "New ByteCrew Inquiry",
+          from_name: "ByteCrew Website",
+          name: formData.name,
+          contact: formData.contact,
+          service: formData.service || "Not specified",
+          message: formData.message,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitted(true);
+        setFormData({ name: "", contact: "", service: "", message: "" });
+        setTimeout(() => setSubmitted(false), 3000);
+      } else {
+        setError(result.message || "Something went wrong. Please WhatsApp us instead.");
+      }
+    } catch {
+      setError("Network error. Please WhatsApp us instead.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const contactMethods = [
@@ -180,7 +211,7 @@ const Contact = () => {
                             </p>
                           )}
                           {method.href && (
-                            <a
+                            
                               href={method.href}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -231,6 +262,16 @@ const Contact = () => {
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-5">
+                {/* Honeypot — bots fill this, humans don't. Web3Forms auto-rejects. */}
+                <input
+                  type="checkbox"
+                  name="botcheck"
+                  className="hidden"
+                  style={{ display: "none" }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+
                 {/* Name Field */}
                 <div>
                   <Input
@@ -285,13 +326,18 @@ const Contact = () => {
                   />
                 </div>
 
+                {/* Error Message */}
+                {error && (
+                  <p className="text-sm text-destructive text-center">{error}</p>
+                )}
+
                 {/* Submit Button */}
                 <Button
                   type="submit"
                   className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-6 text-base"
-                  disabled={submitted}
+                  disabled={loading || submitted}
                 >
-                  {submitted ? "Message Sent!" : "Send Message"}
+                  {submitted ? "Message Sent!" : loading ? "Sending..." : "Send Message"}
                 </Button>
 
                 <p className="text-xs text-muted-foreground text-center">
