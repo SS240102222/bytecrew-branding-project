@@ -211,7 +211,7 @@ const Contact = () => {
                             </p>
                           )}
                           {method.href && (
-                            
+  
                               href={method.href}
                               target="_blank"
                               rel="noopener noreferrer"
