@@ -3,6 +3,8 @@ import { useRef, useState } from "react";
 import { MessageCircle, Mail, MapPin, Send } from "lucide-react";
 import { z } from "zod";
 
+const WHATSAPP_NUMBER = "923390053646";
+
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
   email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
@@ -12,7 +14,7 @@ const contactSchema = z.object({
 const ContactSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  
+
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,9 +27,17 @@ const ContactSection = () => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const openLink = (href: string) => {
+    if (href.startsWith("mailto:")) {
+      window.location.href = href;
+    } else {
+      window.open(href, "_blank", "noopener,noreferrer");
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const result = contactSchema.safeParse(formData);
     if (!result.success) {
       const fieldErrors: { name?: string; email?: string; message?: string } = {};
@@ -41,11 +51,21 @@ const ContactSection = () => {
     }
 
     setIsSubmitting(true);
-    // Simulate submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    const lines = [
+      "Hi ByteCrew, I'd like to discuss a project.",
+      "",
+      `Name: ${formData.name}`,
+      `Email: ${formData.email}`,
+      `Message: ${formData.message}`,
+    ];
+    const text = encodeURIComponent(lines.join("\n"));
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank", "noopener,noreferrer");
+
     setIsSubmitting(false);
     setIsSubmitted(true);
     setFormData({ name: "", email: "", message: "" });
+    setTimeout(() => setIsSubmitted(false), 3000);
   };
 
   const contactInfo = [
@@ -53,13 +73,13 @@ const ContactSection = () => {
       icon: MessageCircle,
       label: "WhatsApp",
       value: "+92 339-0053646",
-      href: "https://wa.me/923390053646",
+      href: `https://wa.me/${WHATSAPP_NUMBER}`,
     },
     {
       icon: Mail,
       label: "Email",
       value: "bytecrew.team@gmail.com",
-      href: "mailto: bytecrew.team@gmail.com",
+      href: "mailto:bytecrew.team@gmail.com",
     },
     {
       icon: MapPin,
@@ -72,7 +92,7 @@ const ContactSection = () => {
   return (
     <section id="contact" className="py-16 md:py-20 relative" ref={ref}>
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/5 to-secondary/20" />
-      
+
       <div className="section-container relative z-10">
         {/* Section Header */}
         <motion.div
@@ -120,13 +140,13 @@ const ContactSection = () => {
                   <div>
                     <p className="text-sm text-muted-foreground">{info.label}</p>
                     {info.href ? (
-                      <a
-                        href={info.href}
-                        {...(info.href.startsWith('http') && { target: "_blank", rel: "noopener noreferrer" })}
-                        className="font-medium hover:text-primary transition-colors"
+                      <button
+                        type="button"
+                        onClick={() => info.href && openLink(info.href)}
+                        className="font-medium hover:text-primary transition-colors text-left bg-transparent border-0 p-0 cursor-pointer"
                       >
                         {info.value}
-                      </a>
+                      </button>
                     ) : (
                       <p className="font-medium">{info.value}</p>
                     )}
@@ -206,12 +226,12 @@ const ContactSection = () => {
                 className="w-full py-4 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-primary/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
-                  "Sending..."
+                  "Opening WhatsApp..."
                 ) : isSubmitted ? (
-                  "Message Sent!"
+                  "Opening WhatsApp..."
                 ) : (
                   <>
-                    Send Message
+                    Send via WhatsApp
                     <Send className="w-4 h-4" />
                   </>
                 )}
