@@ -9,7 +9,7 @@ const Footer = () => {
           {/* Left: ByteCrew Logo/Name */}
           <Link to="/" className="flex items-center gap-2">
             <img
-              src="/logo-removebg-preview.png"
+              src="/bytecrew-icon.png"
               alt="ByteCrew Logo"
               width={32}
               height={32}
