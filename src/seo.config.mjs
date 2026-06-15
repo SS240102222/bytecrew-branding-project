@@ -8,11 +8,11 @@
 //      tags into static HTML so link scrapers (WhatsApp, Facebook, Slack, etc.)
 //      see the correct per-page preview WITHOUT running JavaScript.
 //
-// IMPORTANT: BASE_URL must exactly match the real deployed domain.
-// Right now the site is inconsistent (index.html + sitemap use bytecrew.dev,
-// the CORS header in vercel.json uses bytecrew.vercel.app). This file keeps the
-// existing intent (bytecrew.dev). If the real live domain is different, change
-// BASE_URL here ONCE and everything (canonical, og:url) follows.
+// IMPORTANT: BASE_URL must exactly match the real deployed domain. It is the
+// single place the domain is defined - canonical, og:url and the prerendered
+// static HTML all derive from it. If you move to a custom domain later, change
+// BASE_URL here ONCE (and update public/sitemap.xml, public/robots.txt,
+// index.html, and the CORS header in vercel.json to match).
 // =============================================================================
 
 export const BASE_URL = "https://bytecrew.vercel.app";

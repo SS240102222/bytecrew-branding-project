@@ -1,5 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { applyRouteSeo } from "@/utils/seo";
 import { Mail, MapPin, MessageCircle, MessageSquare, Phone, CheckCircle } from "lucide-react";
 import Navigation from "@/components/Navigation";
@@ -15,8 +17,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  fullContactSchema,
+  type FullContactValues,
+  submitToWeb3Forms,
+} from "@/lib/contact";
 
 const WHATSAPP_NUMBER = "923390053646";
+
+const serviceLabels: Record<string, string> = {
+  "web-development": "Web Development",
+  "custom-pc": "Custom PC Build",
+  "repair": "Repair or Optimization",
+  "not-sure": "Not Sure Yet",
+};
 
 const Contact = () => {
   useEffect(() => {
@@ -25,21 +39,46 @@ const Contact = () => {
 
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-  const [formData, setFormData] = useState({
-    name: "",
-    contact: "",
-    service: "",
-    message: "",
+
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [serverError, setServerError] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FullContactValues>({
+    resolver: zodResolver(fullContactSchema),
+    defaultValues: { name: "", contact: "", service: "", message: "", botcheck: "" },
   });
-  const [submitted, setSubmitted] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleServiceChange = (value: string) => {
-    setFormData((prev) => ({ ...prev, service: value }));
+  const onSubmit = async (values: FullContactValues) => {
+    setServerError("");
+    if (values.botcheck) {
+      setStatus("success");
+      reset();
+      return;
+    }
+    const looksLikeEmail = /\S+@\S+\.\S+/.test(values.contact);
+    try {
+      await submitToWeb3Forms({
+        subject: "New ByteCrew enquiry (contact page)",
+        from_name: "ByteCrew Website",
+        name: values.name,
+        contact: values.contact,
+        ...(looksLikeEmail ? { replyto: values.contact } : {}),
+        service: serviceLabels[values.service || ""] || "Not specified",
+        message: values.message,
+      });
+      setStatus("success");
+      reset();
+      setTimeout(() => setStatus("idle"), 6000);
+    } catch (err) {
+      setStatus("error");
+      setServerError(err instanceof Error ? err.message : "Something went wrong.");
+    }
   };
 
   const openLink = (href: string) => {
@@ -48,34 +87,6 @@ const Contact = () => {
     } else {
       window.open(href, "_blank", "noopener,noreferrer");
     }
-  };
-
-  const serviceLabels: Record<string, string> = {
-    "web-development": "Web Development",
-    "custom-pc": "Custom PC Build",
-    "repair": "Repair or Optimization",
-    "not-sure": "Not Sure Yet",
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const lines = [
-      "Hi ByteCrew, I'd like to discuss a project.",
-      "",
-      `Name: ${formData.name}`,
-      `Contact: ${formData.contact}`,
-      `Service: ${serviceLabels[formData.service] || "Not specified"}`,
-      `Message: ${formData.message}`,
-    ];
-    const text = encodeURIComponent(lines.join("\n"));
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank", "noopener,noreferrer");
-
-    setSubmitted(true);
-    setTimeout(() => {
-      setFormData({ name: "", contact: "", service: "", message: "" });
-      setSubmitted(false);
-    }, 3000);
   };
 
   const contactMethods = [
@@ -251,72 +262,94 @@ const Contact = () => {
                 </h2>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
+                {/* Honeypot (hidden from users) */}
+                <input
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  className="hidden"
+                  aria-hidden="true"
+                  {...register("botcheck")}
+                />
+
                 {/* Name Field */}
                 <div>
                   <Input
                     type="text"
-                    name="name"
                     placeholder="Your Name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
+                    {...register("name")}
                     className="bg-card border-border text-foreground placeholder:text-muted-foreground"
                   />
+                  {errors.name && <p className="mt-1 text-sm text-destructive">{errors.name.message}</p>}
                 </div>
 
                 {/* Contact Field */}
                 <div>
                   <Input
                     type="text"
-                    name="contact"
                     placeholder="WhatsApp or Email"
-                    value={formData.contact}
-                    onChange={handleInputChange}
-                    required
+                    {...register("contact")}
                     className="bg-card border-border text-foreground placeholder:text-muted-foreground"
                   />
+                  {errors.contact && <p className="mt-1 text-sm text-destructive">{errors.contact.message}</p>}
                 </div>
 
                 {/* Service Dropdown */}
                 <div>
-                  <Select value={formData.service} onValueChange={handleServiceChange}>
-                    <SelectTrigger className="bg-card border-border text-foreground">
-                      <SelectValue placeholder="Service Interested In" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-card border-border">
-                      <SelectItem value="web-development">Web Development</SelectItem>
-                      <SelectItem value="custom-pc">Custom PC Build</SelectItem>
-                      <SelectItem value="repair">Repair or Optimization</SelectItem>
-                      <SelectItem value="not-sure">Not Sure Yet</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Controller
+                    control={control}
+                    name="service"
+                    render={({ field }) => (
+                      <Select value={field.value} onValueChange={field.onChange}>
+                        <SelectTrigger className="bg-card border-border text-foreground">
+                          <SelectValue placeholder="Service Interested In" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-card border-border">
+                          <SelectItem value="web-development">Web Development</SelectItem>
+                          <SelectItem value="custom-pc">Custom PC Build</SelectItem>
+                          <SelectItem value="repair">Repair or Optimization</SelectItem>
+                          <SelectItem value="not-sure">Not Sure Yet</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
                 </div>
 
                 {/* Message Field */}
                 <div>
                   <Textarea
-                    name="message"
                     placeholder="Describe what you need — don't worry about being too technical or too vague. We'll figure it out together."
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    required
+                    {...register("message")}
                     rows={5}
                     className="bg-card border-border text-foreground placeholder:text-muted-foreground resize-none"
                   />
+                  {errors.message && <p className="mt-1 text-sm text-destructive">{errors.message.message}</p>}
                 </div>
 
                 {/* Submit Button */}
                 <Button
                   type="submit"
                   className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-6 text-base"
-                  disabled={submitted}
+                  disabled={isSubmitting}
                 >
-                  {submitted ? "Opening WhatsApp..." : "Send via WhatsApp"}
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
 
+                {status === "success" && (
+                  <p className="flex items-center justify-center gap-2 text-sm text-primary">
+                    <CheckCircle className="w-4 h-4" />
+                    Message sent. We'll reach out within a few hours during business hours PKT.
+                  </p>
+                )}
+                {status === "error" && (
+                  <p className="text-sm text-destructive text-center">
+                    {serverError || "Something went wrong."} You can also reach us on WhatsApp.
+                  </p>
+                )}
+
                 <p className="text-xs text-muted-foreground text-center">
-                  This opens WhatsApp with your message ready to send. We don't spam.
+                  Your message goes straight to the founders. We don't spam.
                 </p>
               </form>
             </motion.div>

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bytecrew.dev/sitemap.xml
+Sitemap: https://bytecrew.vercel.app/sitemap.xml

@@ -1,29 +1,56 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { MessageCircle, Mail, MapPin, Send } from "lucide-react";
-import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { MessageCircle, Mail, MapPin, Send, CheckCircle } from "lucide-react";
+import {
+  homeContactSchema,
+  type HomeContactValues,
+  submitToWeb3Forms,
+} from "@/lib/contact";
 
 const WHATSAPP_NUMBER = "923390053646";
-
-const contactSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
-  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
-  message: z.string().trim().min(1, "Message is required").max(1000, "Message must be less than 1000 characters"),
-});
 
 const ContactSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [serverError, setServerError] = useState<string>("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    if (errors[e.target.name as keyof typeof errors]) {
-      setErrors({ ...errors, [e.target.name]: undefined });
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<HomeContactValues>({
+    resolver: zodResolver(homeContactSchema),
+    defaultValues: { name: "", email: "", message: "", botcheck: "" },
+  });
+
+  const onSubmit = async (values: HomeContactValues) => {
+    setServerError("");
+    // Honeypot tripped: silently pretend success, send nothing.
+    if (values.botcheck) {
+      setStatus("success");
+      reset();
+      return;
+    }
+    try {
+      await submitToWeb3Forms({
+        subject: "New ByteCrew enquiry (homepage form)",
+        from_name: "ByteCrew Website",
+        name: values.name,
+        email: values.email,
+        replyto: values.email,
+        message: values.message,
+      });
+      setStatus("success");
+      reset();
+      setTimeout(() => setStatus("idle"), 5000);
+    } catch (err) {
+      setStatus("error");
+      setServerError(err instanceof Error ? err.message : "Something went wrong.");
     }
   };
 
@@ -33,39 +60,6 @@ const ContactSection = () => {
     } else {
       window.open(href, "_blank", "noopener,noreferrer");
     }
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const result = contactSchema.safeParse(formData);
-    if (!result.success) {
-      const fieldErrors: { name?: string; email?: string; message?: string } = {};
-      result.error.errors.forEach((err) => {
-        if (err.path[0]) {
-          fieldErrors[err.path[0] as keyof typeof fieldErrors] = err.message;
-        }
-      });
-      setErrors(fieldErrors);
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    const lines = [
-      "Hi ByteCrew, I'd like to discuss a project.",
-      "",
-      `Name: ${formData.name}`,
-      `Email: ${formData.email}`,
-      `Message: ${formData.message}`,
-    ];
-    const text = encodeURIComponent(lines.join("\n"));
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank", "noopener,noreferrer");
-
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    setFormData({ name: "", email: "", message: "" });
-    setTimeout(() => setIsSubmitted(false), 3000);
   };
 
   const contactInfo = [
@@ -171,7 +165,17 @@ const ContactSection = () => {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.4, duration: 0.6 }}
           >
-            <form onSubmit={handleSubmit} className="glass-card rounded-2xl p-8 space-y-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="glass-card rounded-2xl p-8 space-y-6" noValidate>
+              {/* Honeypot (hidden from users) */}
+              <input
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                className="hidden"
+                aria-hidden="true"
+                {...register("botcheck")}
+              />
+
               <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-2">
                   Name
@@ -179,13 +183,11 @@ const ContactSection = () => {
                 <input
                   type="text"
                   id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
+                  {...register("name")}
                   className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
                   placeholder="Your name"
                 />
-                {errors.name && <p className="mt-1 text-sm text-destructive">{errors.name}</p>}
+                {errors.name && <p className="mt-1 text-sm text-destructive">{errors.name.message}</p>}
               </div>
 
               <div>
@@ -195,13 +197,11 @@ const ContactSection = () => {
                 <input
                   type="email"
                   id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
+                  {...register("email")}
                   className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
                   placeholder="your@email.com"
                 />
-                {errors.email && <p className="mt-1 text-sm text-destructive">{errors.email}</p>}
+                {errors.email && <p className="mt-1 text-sm text-destructive">{errors.email.message}</p>}
               </div>
 
               <div>
@@ -210,14 +210,12 @@ const ContactSection = () => {
                 </label>
                 <textarea
                   id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
+                  {...register("message")}
                   rows={5}
                   className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-none"
                   placeholder="Tell us about your project..."
                 />
-                {errors.message && <p className="mt-1 text-sm text-destructive">{errors.message}</p>}
+                {errors.message && <p className="mt-1 text-sm text-destructive">{errors.message.message}</p>}
               </div>
 
               <button
@@ -226,16 +224,26 @@ const ContactSection = () => {
                 className="w-full py-4 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-primary/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
-                  "Opening WhatsApp..."
-                ) : isSubmitted ? (
-                  "Opening WhatsApp..."
+                  "Sending..."
                 ) : (
                   <>
-                    Send via WhatsApp
+                    Send Message
                     <Send className="w-4 h-4" />
                   </>
                 )}
               </button>
+
+              {status === "success" && (
+                <p className="flex items-center gap-2 text-sm text-primary">
+                  <CheckCircle className="w-4 h-4" />
+                  Thanks! Your message has been sent. We'll reply within 24 hours.
+                </p>
+              )}
+              {status === "error" && (
+                <p className="text-sm text-destructive">
+                  {serverError || "Something went wrong."} You can also reach us on WhatsApp.
+                </p>
+              )}
             </form>
           </motion.div>
         </div>

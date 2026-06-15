@@ -1,74 +1,81 @@
-// Performance optimization utilities
+// Core Web Vitals monitoring (dependency-free).
+//
+// Captures the two field metrics most worth watching for a content site — LCP
+// (loading) and CLS (visual stability) — using native PerformanceObserver, and
+// logs a console warning when a metric lands in the "poor" band. Values are
+// finalized when the page is hidden/unloaded, which is when the browser knows
+// the final LCP candidate and accumulated layout shift.
+//
+// For production-grade field data (percentiles across real users), add Vercel
+// Speed Insights or Google Analytics and forward `report()` to it — the hook is
+// already here.
 
-/**
- * Report web vitals to analytics or monitoring services
- * Used to track LCP, CLS, FID/INP for performance monitoring
- */
-export const reportWebVitals = (metric: any) => {
-  if (typeof window !== 'undefined') {
-    // Minimal logging - log only critical metrics exceeding thresholds
-    if (metric.rating === 'poor') {
-      console.warn(`[Performance] ${metric.name}: ${metric.value}ms (${metric.rating})`);
-    }
+interface WebVitalMetric {
+  name: "LCP" | "CLS";
+  value: number;
+  rating: "good" | "needs-improvement" | "poor";
+}
+
+const rate = (
+  value: number,
+  goodMax: number,
+  poorMin: number
+): WebVitalMetric["rating"] =>
+  value <= goodMax ? "good" : value < poorMin ? "needs-improvement" : "poor";
+
+const report = (metric: WebVitalMetric) => {
+  if (metric.rating === "poor") {
+    console.warn(
+      `[web-vitals] ${metric.name}: ${Math.round(metric.value * 1000) / 1000} (${metric.rating})`
+    );
   }
+  // Forward to analytics here if/when configured, e.g.:
+  // window.dataLayer?.push({ event: "web-vitals", ...metric });
 };
 
-/**
- * Prefetch a route to improve navigation performance
- */
-export const prefetchRoute = (url: string) => {
-  if (typeof window === 'undefined') return;
-  const link = document.createElement('link');
-  link.rel = 'prefetch';
-  link.href = url;
-  document.head.appendChild(link);
-};
+export const initializeWebVitalsMonitoring = () => {
+  if (typeof window === "undefined" || !("PerformanceObserver" in window)) return;
 
-/**
- * Defer non-critical images from loading
- */
-export const deferImages = () => {
-  if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
+  let lcp = 0;
+  let cls = 0;
+  let reported = false;
 
-  const images = document.querySelectorAll('img[data-defer]');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const img = entry.target as HTMLImageElement;
-        const src = img.getAttribute('data-src');
-        if (src) {
-          img.src = src;
-          img.removeAttribute('data-defer');
-          img.removeAttribute('data-src');
-        }
-        observer.unobserve(img);
+  // Largest Contentful Paint: keep the latest candidate.
+  try {
+    const lcpObserver = new PerformanceObserver((list) => {
+      const entries = list.getEntries();
+      const last = entries[entries.length - 1] as PerformanceEntry & { startTime: number };
+      if (last) lcp = last.startTime;
+    });
+    lcpObserver.observe({ type: "largest-contentful-paint", buffered: true });
+  } catch {
+    /* unsupported browser */
+  }
+
+  // Cumulative Layout Shift: sum shifts not caused by recent user input.
+  try {
+    const clsObserver = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries() as Array<
+        PerformanceEntry & { value: number; hadRecentInput: boolean }
+      >) {
+        if (!entry.hadRecentInput) cls += entry.value;
       }
     });
-  });
-
-  images.forEach((img) => observer.observe(img));
-};
-
-/**
- * Monitor Core Web Vitals using web-vitals library pattern
- */
-export const initializeWebVitalsMonitoring = () => {
-  if (typeof window === 'undefined') return;
-
-  // Monitor CLS (Cumulative Layout Shift)
-  if ('PerformanceObserver' in window) {
-    try {
-      const observer = new PerformanceObserver((list) => {
-        for (const entry of list.getEntries()) {
-          // Layout shift detected - log if significant
-          if ((entry as any).hadRecentInput === false) {
-            // Only log unexpected shifts (not caused by user input)
-          }
-        }
-      });
-      observer.observe({ entryTypes: ['layout-shift'] });
-    } catch (e) {
-      // Older browsers don't support this
-    }
+    clsObserver.observe({ type: "layout-shift", buffered: true });
+  } catch {
+    /* unsupported browser */
   }
+
+  // Finalize once, when the page is backgrounded or unloaded.
+  const finalize = () => {
+    if (reported) return;
+    reported = true;
+    report({ name: "LCP", value: lcp, rating: rate(lcp, 2500, 4000) });
+    report({ name: "CLS", value: cls, rating: rate(cls, 0.1, 0.25) });
+  };
+
+  addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") finalize();
+  });
+  addEventListener("pagehide", finalize);
 };

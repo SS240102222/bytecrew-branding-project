@@ -1,36 +1,7 @@
+import { webProjects as projects } from "@/data/projects";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useCallback, useEffect } from "react";
 import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
-
-const projects = [
-  {
-    title: "Monal Restaurant",
-    description: "A high-end rooftop dining destination showcasing panoramic city views alongside a diverse buffet and à la carte menu.",
-    outcome: "Built to establish online presence and drive dine-in traffic.",
-    image: "/projects/Monal-Lahore.webp",
-    url: "https://monallahore.vercel.app",
-  },
-  {
-    title: "Edge Grooming Barbershop",
-    description: "A premium men's barbershop website offering professional grooming services and an upscale, traditional salon experience.",
-    outcome: "Designed to reduce phone inquiries with a booking-friendly layout.",
-    image: "/projects/The-Edge.webp",
-    url: "https://edge-grooming.vercel.app",
-  },
-  {
-    title: "Andaaz Restaurant",
-    description: "A luxury restaurant in Lahore that blends traditional heritage cuisine with iconic views of the Badshahi Mosque.",
-    outcome: "Cultural identity reflected through design to attract local diners.",
-    image: "/projects/Andaaz-Restaurant.webp",
-    url: "https://andaazrestaurant.vercel.app",
-  },
-  {
-    title: "RayTechPK Online Store",
-    description: "~IN PROGRESS~ \nRayTechPK is a modern e-commerce site for high-performance gaming hardware and PC components, featuring product categories, featured deals, and testimonials to provide a premium tech shopping experience.",
-    image: "/projects/RayTechPK.webp",
-    url: "https://raytech-pk.vercel.app",
-  },
-];
 
 const ProjectsSection = () => {
   const sectionRef = useRef(null);
