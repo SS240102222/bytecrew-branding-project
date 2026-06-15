@@ -12,7 +12,6 @@ const Packages = lazy(() => import("./pages/Packages"));
 const Projects = lazy(() => import("./pages/Portfolio"));
 const Contact = lazy(() => import("./pages/Contact"));
 const About = lazy(() => import("./pages/About"));
-const Tags = lazy(() => import("./pages/Tags"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const ReturnRefundPolicy = lazy(() => import("./pages/ReturnRefundPolicy"));
 const ShippingServicePolicy = lazy(() => import("./pages/ShippingServicePolicy"));
