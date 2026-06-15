@@ -15,7 +15,7 @@
 // BASE_URL here ONCE and everything (canonical, og:url) follows.
 // =============================================================================
 
-export const BASE_URL = "https://bytecrew.dev";
+export const BASE_URL = "https://bytecrew.vercel.app";
 
 // Default share image used when a route does not specify its own.
 // NOTE: this is the logo. For best-looking previews, replace per-route with a
