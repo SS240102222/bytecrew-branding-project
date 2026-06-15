@@ -3,7 +3,7 @@ import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import TrustBar from "@/components/TrustBar";
 import WhyByteCrew from "@/components/WhyByteCrew";
-import { updateMetaTags, getCanonicalUrl } from "@/utils/seo";
+import { applyRouteSeo } from "@/utils/seo";
 
 // Lazy load below-the-fold sections
 const ServicesOverview = lazy(() => import("@/components/ServicesOverview"));
@@ -19,13 +19,7 @@ const WhatsAppButton = lazy(() => import("@/components/WhatsAppButton"));
 
 const Index = () => {
   useEffect(() => {
-    updateMetaTags({
-      title: "ByteCrew | Smart Web & Tech Solutions in Lahore, Pakistan",
-      description: "Lahore-based web development, custom PC builds, and repairs. Zero upfront payment. Pay only when satisfied. Founder-led, cost-efficient, performance-focused.",
-      canonical: getCanonicalUrl("/"),
-      ogTitle: "ByteCrew | Smart Web & Tech Solutions in Lahore, Pakistan",
-      ogDescription: "Lahore-based web development, custom PC builds, and repairs. Zero upfront payment. Pay only when satisfied. Founder-led, cost-efficient, performance-focused.",
-    });
+    applyRouteSeo("/");
   }, []);
 
   return (

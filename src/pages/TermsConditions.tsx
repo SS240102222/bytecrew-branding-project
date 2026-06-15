@@ -1,7 +1,7 @@
 import PolicyPage from "@/components/PolicyPage";
 
 const TermsConditions = () => (
-  <PolicyPage title="Terms & Conditions">
+  <PolicyPage title="Terms & Conditions" seoPath="/terms-conditions">
     <p><strong className="text-foreground">Effective Date:</strong> February 13, 2026<br /><strong className="text-foreground">Last Updated:</strong> February 13, 2026</p>
 
     <p>Welcome to ByteCrew! These Terms & Conditions govern your use of our services and establish the agreement between you (the customer) and ByteCrew. By using our services—whether computer repair, custom PC builds, or web development—you agree to these terms.</p>

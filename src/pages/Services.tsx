@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect } from "react";
-import { updateMetaTags, getCanonicalUrl } from "@/utils/seo";
+import { applyRouteSeo } from "@/utils/seo";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -69,13 +69,7 @@ const ServiceSection = ({ label, title, cards, isInView }: { label: string; titl
 
 const Services = () => {
   useEffect(() => {
-    updateMetaTags({
-      title: "Our Services | Web Development, PC Builds & Repairs — ByteCrew",
-      description: "Business websites, e-commerce, custom PC builds, gaming rigs, laptop repairs and optimization. Every service starts with a free consultation and zero upfront payment.",
-      canonical: getCanonicalUrl("/services"),
-      ogTitle: "Our Services | Web Development, PC Builds & Repairs — ByteCrew",
-      ogDescription: "Business websites, e-commerce, custom PC builds, gaming rigs, laptop repairs and optimization. Every service starts with a free consultation and zero upfront payment.",
-    });
+    applyRouteSeo("/services");
   }, []);
 
   const sectionRef = useRef(null);

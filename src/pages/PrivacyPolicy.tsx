@@ -1,7 +1,7 @@
 import PolicyPage from "@/components/PolicyPage";
 
 const PrivacyPolicy = () => (
-  <PolicyPage title="Privacy Policy">
+  <PolicyPage title="Privacy Policy" seoPath="/privacy-policy">
     <p><strong className="text-foreground">Effective Date:</strong> February 13, 2026<br /><strong className="text-foreground">Last Updated:</strong> February 13, 2026</p>
 
     <p>At ByteCrew, we take your privacy seriously. This policy explains how we collect, use, protect, and handle your personal information when you use our computer repair, custom PC building, and web development services.</p>

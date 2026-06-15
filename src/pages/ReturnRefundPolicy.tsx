@@ -1,7 +1,7 @@
 import PolicyPage from "@/components/PolicyPage";
 
 const ReturnRefundPolicy = () => (
-  <PolicyPage title="Return & Refund Policy">
+  <PolicyPage title="Return & Refund Policy" seoPath="/return-refund-policy">
     <p><strong className="text-foreground">Effective Date:</strong> February 13, 2026<br /><strong className="text-foreground">Last Updated:</strong> February 13, 2026</p>
 
     <p>At ByteCrew, we stand behind the quality of our work. This policy outlines how refunds and returns work across our different service categories. We've designed these terms to be fair to both you and our business while accounting for the unique nature of tech services and custom builds.</p>

@@ -1,7 +1,7 @@
 import PolicyPage from "@/components/PolicyPage";
 
 const ShippingServicePolicy = () => (
-  <PolicyPage title="Shipping & Service Policy">
+  <PolicyPage title="Shipping & Service Policy" seoPath="/shipping-service-policy">
     <p><strong className="text-foreground">Effective Date:</strong> February 13, 2026<br /><strong className="text-foreground">Last Updated:</strong> February 13, 2026</p>
 
     <p>ByteCrew offers flexible service delivery to fit your needs. Whether you prefer to bring your device to us, have us come to you, or handle everything remotely, we've got options. This policy explains how we deliver services, ship products, and keep you updated throughout the process.</p>

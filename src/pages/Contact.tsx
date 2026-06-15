@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { updateMetaTags, getCanonicalUrl } from "@/utils/seo";
+import { applyRouteSeo } from "@/utils/seo";
 import { Mail, MapPin, MessageCircle, MessageSquare, Phone, CheckCircle } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -20,13 +20,7 @@ const WHATSAPP_NUMBER = "923390053646";
 
 const Contact = () => {
   useEffect(() => {
-    updateMetaTags({
-      title: "Contact ByteCrew | Free Consultation, No Commitment",
-      description: "Get in touch with ByteCrew via WhatsApp or email. Free consultation, zero pressure. Based in Lahore, serving clients in Pakistan and worldwide.",
-      canonical: getCanonicalUrl("/contact"),
-      ogTitle: "Contact ByteCrew | Free Consultation, No Commitment",
-      ogDescription: "Get in touch with ByteCrew via WhatsApp or email. Free consultation, zero pressure. Based in Lahore, serving clients in Pakistan and worldwide.",
-    });
+    applyRouteSeo("/contact");
   }, []);
 
   const sectionRef = useRef(null);

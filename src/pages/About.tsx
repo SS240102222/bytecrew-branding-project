@@ -4,17 +4,11 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import { updateMetaTags, getCanonicalUrl } from "@/utils/seo";
+import { applyRouteSeo } from "@/utils/seo";
 
 const About = () => {
   useEffect(() => {
-    updateMetaTags({
-      title: "About ByteCrew | Founder-Led Tech Startup, Lahore",
-      description: "ByteCrew is a lean, founder-led tech startup from Lahore. We handle every project directly — no outsourcing, no juniors, no advance payment until you're satisfied.",
-      canonical: getCanonicalUrl("/about"),
-      ogTitle: "About ByteCrew | Founder-Led Tech Startup, Lahore",
-      ogDescription: "ByteCrew is a lean, founder-led tech startup from Lahore. We handle every project directly — no outsourcing, no juniors, no advance payment until you're satisfied.",
-    });
+    applyRouteSeo("/about");
   }, []);
 
   const coreValues = [

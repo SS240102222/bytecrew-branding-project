@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { updateMetaTags, getCanonicalUrl } from "@/utils/seo";
+import { applyRouteSeo } from "@/utils/seo";
 import { ArrowRight, CheckCircle2, ChevronDown } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -8,13 +8,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 
 const Packages = () => {
   useEffect(() => {
-    updateMetaTags({
-      title: "Packages & Pricing | ByteCrew — No Upfront Payment",
-      description: "Transparent packages for web development and tech services. 0% upfront, 30-day post-launch support, pay only when satisfied. Serving Lahore and worldwide.",
-      canonical: getCanonicalUrl("/packages"),
-      ogTitle: "Packages & Pricing | ByteCrew — No Upfront Payment",
-      ogDescription: "Transparent packages for web development and tech services. 0% upfront, 30-day post-launch support, pay only when satisfied. Serving Lahore and worldwide.",
-    });
+    applyRouteSeo("/packages");
   }, []);
 
   const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);

@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect } from "react";
-import { updateMetaTags, getCanonicalUrl } from "@/utils/seo";
+import { applyRouteSeo } from "@/utils/seo";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -72,13 +72,7 @@ const beforeAfterCases = [
 
 const Portfolio = () => {
   useEffect(() => {
-    updateMetaTags({
-      title: "Our Projects | Web Projects & PC Builds — ByteCrew",
-      description: "See websites we've built, PC builds we've specced, and before/after optimization results. Real work, real outcomes, no fluff.",
-      canonical: getCanonicalUrl("/projects"),
-      ogTitle: "Our Projects | Web Projects & PC Builds — ByteCrew",
-      ogDescription: "See websites we've built, PC builds we've specced, and before/after optimization results. Real work, real outcomes, no fluff.",
-    });
+    applyRouteSeo("/projects");
   }, []);
 
   const heroRef = useRef(null);
