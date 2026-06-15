@@ -20,7 +20,7 @@ export const BASE_URL = "https://bytecrew.vercel.app";
 // Default share image used when a route does not specify its own.
 // NOTE: this is the logo. For best-looking previews, replace per-route with a
 // proper 1200x630 PNG/JPG share image (logos render poorly as social cards).
-export const DEFAULT_OG_IMAGE = `${BASE_URL}/Logo-Main.png`;
+export const DEFAULT_OG_IMAGE = `${BASE_URL}/bytecrew-logo-dark.png`;
 
 // path -> metadata. Keep paths in sync with the routes in src/App.tsx.
 export const SEO_ROUTES = {
