@@ -1,48 +1,34 @@
-# Logo Replacement & Typography Plan
+# Navbar Gradient Blur & Fade
 
 ## Goal
-Swap every logo across the site to the new ByteCrew brand assets, using the correct variant (transparent / opaque / tiny) per context. Set the tiny icon as the tab favicon. Verify typography matches the requested mapping. No other features, files, or code touched.
+When scrolled, the navbar currently gets the shared `glass-card` style (translucent card background + green border). Replace this with a dedicated backdrop that:
+- Has **no green outline** anywhere.
+- Blurs the page content behind it (gradient blur), strongest at the very top.
+- Fades vertically: fully opaque at the top (100%), fully transparent at the bottom (0%) — no hard edge/outline at the bottom.
+- Leaves the logo, nav links, "Let's Talk" button, and mobile menu icon fully visible and unaffected by the fade.
 
-## New assets provided
-- **Transparent full logo** (icon + "ByteCrew" text, transparent background) — `New_ByteCrew_logo_transparent_2.png`
-- **Opaque full logo** (icon + text on dark navy background, square) — `New_ByteCrew_logo.png`
-- **Tiny icon** (just the `{/}` brackets, transparent) — `tiny_icon.png`
+## Approach
+The fix is scoped to `src/components/Navigation.tsx` only. We will **not** touch the shared `.glass-card` class in `index.css`, since it's reused by cards across the site.
 
-## Step 1 — Add new logo files to `public/`
-Copy the uploads into `public/` with clear names:
-- `bytecrew-icon.png` ← tiny transparent bracket icon
-- `bytecrew-logo.png` ← transparent full logo (icon + text)
-- `bytecrew-logo-dark.png` ← opaque dark-background full logo
-- Regenerate `public/favicon.ico` from the tiny icon (so browsers requesting `/favicon.ico` get the new mark)
+### 1. Separate background layer from content
+Make the `<nav>` a positioned container (`relative`, `overflow-hidden`) and stop applying `glass-card` to it. Add a dedicated absolutely-positioned background `<div>` (behind the content, `-z-10`) that carries the blur + fade. The existing content row stays on top (`relative z-10`) so its opacity is never reduced.
 
-## Step 2 — Replace logo references in code
+### 2. Gradient fade + blur on the background layer (scrolled state only)
+The background div, shown only when `isScrolled`, gets:
+- A translucent background tint using a semantic token (e.g. `bg-background/70`) — no border.
+- `backdrop-blur` for the blur effect.
+- A CSS `mask-image` / `-webkit-mask-image` of `linear-gradient(to bottom, black 0%, transparent 100%)` so both the tint and the blur fade from 100% opacity at the top to 0% at the bottom. This removes any visible bottom edge/outline and produces the gradient-blur look.
 
-| Location | Current | New |
-|---|---|---|
-| `src/components/Navigation.tsx` (32×32 mark beside "ByteCrew" text) | `/logo-removebg-preview.png` | `/bytecrew-icon.png` (tiny, transparent) |
-| `src/components/Footer.tsx` (32×32 mark beside "ByteCrew" text) | `/logo-removebg-preview.png` | `/bytecrew-icon.png` (tiny, transparent) |
-| `index.html` favicon (tab icon) | `/logo.png` | `/bytecrew-icon.png` (tiny) |
-| `index.html` apple-touch-icon | `/logo.png` | `/bytecrew-logo-dark.png` (opaque, square) |
-| `index.html` og:image / twitter:image | `https://bytecrew.vercel.app/Logo-Main.png` | opaque full logo URL (`/bytecrew-logo-dark.png`) |
-| `src/seo.config.mjs` `DEFAULT_OG_IMAGE` | `Logo-Main.png` | `bytecrew-logo-dark.png` |
+Because the mask is applied to the background layer, the navbar content (links/buttons/logo) is not masked or faded.
 
-Rationale: nav and footer already show the word "ByteCrew" next to the mark, so the tiny bracket-only icon is the right fit there and as the favicon. Social/Open Graph cards and the apple-touch icon use the opaque full logo (it has a solid background and reads well as a card/home-screen tile).
+### 3. Remove the border
+No `border` utilities on the nav or its background layer, eliminating the green outline on all sides.
 
-## Step 3 — Remove now-unused old logo files
-Delete `public/logo-removebg-preview.png`, `public/logo.png`, and `public/Logo-Main.png` once no references remain (keeps the repo clean; no code points to them after Step 2).
+### 4. Keep existing behavior
+- Keep the `isScrolled` scroll listener and the `py-4`/`py-6` padding transition.
+- Keep the entrance animation (`animate-fade-in-down`) and the mobile menu dropdown unchanged (its own solid background stays for readability).
 
-## Step 4 — Typography verification
-Requested mapping:
-- Headings → Tektur
-- Sub-headings → JetBrains Mono
-- Body → Lexend & JetBrains Mono
-
-Current `src/index.css` already sets `h1,h2,h3 → Tektur`, `h4,h5,h6 → JetBrains Mono`, and `body → Lexend`; `tailwind.config.ts` exposes `font-mono` (JetBrains Mono) and `font-sans` (Lexend). This already satisfies the mapping, so no font changes are needed. If verification shows any heading/sub-heading not inheriting these, it will be corrected minimally without altering other styles.
-
-## Out of scope
-No changes to layout, components, animations, colors, content, or any other file beyond the logo references and asset files listed above.
-
-## Verification
-- Load home, services, footer in preview and confirm new tiny icon renders crisp on the dark background in nav + footer.
-- Confirm the browser tab shows the new tiny icon favicon.
-- Confirm no broken image references remain (grep for old filenames returns nothing).
+## Technical Notes
+- Mask gradient: `style={{ WebkitMaskImage: 'linear-gradient(to bottom, black, transparent)', maskImage: 'linear-gradient(to bottom, black, transparent)' }}` on the background layer.
+- Use `backdrop-blur-md` (or similar) plus `bg-background/70` token — no hardcoded colors.
+- Background layer: `absolute inset-0 -z-10` and only rendered/visible when `isScrolled`; content wrapper gets `relative z-10`.
