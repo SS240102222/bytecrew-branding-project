@@ -33,10 +33,20 @@ const Navigation = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 animate-fade-in-down ${
-        isScrolled ? "glass-card py-4" : "py-6"
+        isScrolled ? "py-4" : "py-6"
       }`}
     >
-      <div className="section-container flex items-center justify-between">
+      {isScrolled && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10 bg-background/70 backdrop-blur-md"
+          style={{
+            WebkitMaskImage: "linear-gradient(to bottom, black 0%, transparent 100%)",
+            maskImage: "linear-gradient(to bottom, black 0%, transparent 100%)",
+          }}
+        />
+      )}
+      <div className="section-container relative z-10 flex items-center justify-between">
         <a href="/" className="flex items-center gap-2 text-xl font-bold text-foreground hover:text-primary transition-colors">
           <img
             src="/bytecrew-icon.png"
