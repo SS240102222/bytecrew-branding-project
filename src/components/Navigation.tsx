@@ -41,8 +41,8 @@ const Navigation = () => {
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 -z-10 bg-background/85 backdrop-blur-xl"
           style={{
-            WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 50%, transparent 100%)",
-            maskImage: "linear-gradient(to bottom, black 0%, black 50%, transparent 100%)",
+            WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 60%, transparent 100%)",
+            maskImage: "linear-gradient(to bottom, black 0%, black 60%, transparent 100%)",
           }}
         />
       )}
